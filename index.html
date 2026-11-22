@@ -3,582 +3,323 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HerPromoCodes - Discover the latest verified coupon codes, discounts, and exclusive shopping deals updated daily.">
-  <title>HerPromoCodes | Verified Coupons & Discount Promo Codes</title>
+  <meta name="description" content="PromoBella - Find verified coupon codes, discounts, and savings for top fashion, beauty, and tech brands.">
+  <title>PromoBella | Verified Coupons &amp; Discount Promo Codes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Top Announcement Banner -->
-  <div class="top-bar">
-    <div class="container top-bar__content">
-      <span>✨ <strong>Today's Offers:</strong> Browse verified promo codes and discount deals.</span>
-      <div class="top-bar__links">
-        <a href="#deals">All Deals</a>
-        <a href="#stores">Stores</a>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container">
+      <!-- Left side: Brand Logo + Nav -->
+      <div class="site-header__left">
+        <a href="#" class="site-header__logo">
+          <div class="brand-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg>
+          </div>
+          <span class="logo-text">Promo<span>Bella</span></span>
+        </a>
+        <nav class="site-header__nav" id="mainNav">
+          <ul class="site-header__menu">
+            <li><a href="#stores">Stores</a></li>
+            <li><a href="#deals">Top Deals</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#about">About Us</a></li>
+          </ul>
+        </nav>
       </div>
-    </div>
-  </div>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="container header__container">
-      <a href="#" class="brand-logo">
-        <div class="brand-logo__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-            <line x1="7" y1="7" x2="7.01" y2="7"></line>
-          </svg>
+      <!-- Right: Search + Mobile Menu Toggle -->
+      <div class="site-header__right">
+        <div class="site-header__search">
+          <div class="site-header__searchbox">
+            <input type="text" id="searchKey" placeholder="Search stores or coupons..." autocomplete="off">
+            <button type="button" id="searchBtn" aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4c1fa2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
         </div>
-        <span class="brand-logo__text">Her<span>PromoCodes</span></span>
-      </a>
+        <button class="site-header__toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+      </div>
 
-      <!-- Desktop Nav -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#stores" class="nav-link">Top Stores</a>
-        <a href="#deals" class="nav-link">Coupons & Deals</a>
-        <a href="#how-it-works" class="nav-link">How It Works</a>
-        <button class="nav-btn-highlight" id="openSubmitModal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Submit Coupon
-        </button>
-      </nav>
-
-      <!-- Mobile Hamburger -->
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <!-- Mobile Navigation Drawer -->
+      <div class="site-header__mobile-nav" id="mobileNav">
+        <button class="site-header__mobile-close" id="mobileCloseBtn" aria-label="Close menu">&times;</button>
+        <ul class="site-header__menu--mobile">
+          <li><a href="#stores" class="mobile-link">Stores</a></li>
+          <li><a href="#deals" class="mobile-link">Top Deals</a></li>
+          <li><a href="#categories" class="mobile-link">Categories</a></li>
+          <li><a href="#about" class="mobile-link">About Us</a></li>
+        </ul>
+      </div>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero-section" id="home">
-    <div class="container hero-container">
-      <div class="hero-badge">
-        <span class="pulse-dot"></span> Active &amp; Verified Promo Codes
-      </div>
-      <h1 class="hero-title">Find Working <span class="gradient-text">Promo Codes</span> &amp; Discounts</h1>
-      <p class="hero-subtitle">
-        Search and copy tested promo codes and discounts for popular online stores.
-      </p>
-
-      <!-- Search Box -->
-      <div class="hero-search-wrapper">
-        <div class="hero-search-box">
-          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="searchInput" placeholder="Search stores, brands (e.g. Sephora, Nike, Zara)..." autocomplete="off">
-          <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search">&times;</button>
-          <button class="search-action-btn" id="searchSubmitBtn">Find Deals</button>
-        </div>
-
-        <!-- Quick Trending Tags -->
-        <div class="quick-tags">
-          <span class="quick-tags__label">Trending:</span>
-          <button class="tag-chip" data-store="Sephora">Sephora</button>
-          <button class="tag-chip" data-store="Nike">Nike</button>
-          <button class="tag-chip" data-store="Zara">Zara</button>
-          <button class="tag-chip" data-store="ASOS">ASOS</button>
-          <button class="tag-chip" data-store="Amazon">Amazon</button>
-          <button class="tag-chip" data-store="Ulta">Ulta Beauty</button>
-        </div>
-      </div>
-
-      <!-- Genuine Features Highlights -->
-      <div class="hero-features">
-        <div class="feature-tag">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Tested Promo Codes
-        </div>
-        <div class="feature-tag">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          1-Click Easy Copy
-        </div>
-        <div class="feature-tag">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          100% Free To Use
-        </div>
-      </div>
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">Verified Shopping Deals</div>
+      <h1 class="hero-title">Smart Shopping, Real Savings</h1>
+      <p class="hero-subtitle">Find tested promo codes and exclusive discount offers for your favorite brands.</p>
     </div>
   </section>
 
-  <!-- Popular Stores Section -->
-  <section class="section stores-section" id="stores">
+  <!-- Popular Stores Section (10 Top Brands) -->
+  <section class="store-section" id="stores">
     <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Popular Stores &amp; Brands</h2>
-          <p class="section-subtitle">Browse savings from world-renowned shopping destinations</p>
-        </div>
-        <button class="view-all-link" id="resetStoreFilter">Show All Stores</button>
-      </div>
-
-      <div class="stores-grid" id="storesGrid">
-        <!-- Generated dynamically via JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Coupons & Deals Section -->
-  <section class="section deals-section" id="deals">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Latest Coupons &amp; Verified Deals</h2>
-          <p class="section-subtitle">Copy the code, apply at checkout and enjoy instant discount</p>
-        </div>
-        <div class="deals-count-badge">
-          Showing <span id="dealCount">0</span> Offers
-        </div>
-      </div>
-
-      <!-- Category Filter Pills -->
-      <div class="filter-bar">
-        <div class="category-pills" id="categoryPills">
-          <button class="cat-pill active" data-category="all">
-            <span class="pill-icon">✨</span> All Deals
-          </button>
-          <button class="cat-pill" data-category="fashion">
-            <span class="pill-icon">👗</span> Fashion &amp; Apparel
-          </button>
-          <button class="cat-pill" data-category="beauty">
-            <span class="pill-icon">💄</span> Beauty &amp; Skincare
-          </button>
-          <button class="cat-pill" data-category="electronics">
-            <span class="pill-icon">📱</span> Electronics &amp; Tech
-          </button>
-        </div>
-
-        <!-- Deal Type Tabs -->
-        <div class="deal-type-tabs">
-          <button class="type-tab active" data-type="all">All Types</button>
-          <button class="type-tab" data-type="code">Codes Only</button>
-          <button class="type-tab" data-type="deal">Sales/Deals</button>
-        </div>
-      </div>
-
-      <!-- Deals Grid -->
-      <div class="deals-grid" id="dealsGrid">
+      <h2 class="store-section__title">Popular Stores</h2>
+      <div class="store-grid" id="storeGrid">
         <!-- Rendered dynamically via JS -->
       </div>
-
-      <!-- Empty State -->
-      <div class="no-results" id="noResults" style="display: none;">
-        <div class="no-results__icon">🔍</div>
-        <h3>No coupons found matching your search</h3>
-        <p>Try searching for a different store or reset your filters.</p>
-        <button class="btn btn-primary" id="resetAllFiltersBtn">Reset All Filters</button>
-      </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="section how-it-works-section" id="how-it-works">
+  <!-- Top Deals Section -->
+  <section class="landing-deals-section" id="deals">
     <div class="container">
-      <div class="section-header center">
-        <h2 class="section-title">How To Save With HerPromoCodes</h2>
-        <p class="section-subtitle">Three easy steps to apply discounts to your shopping cart</p>
+      <div class="section-title-wrap">
+        <h2 class="top-deals-section__title">Top Deals</h2>
+        <div class="deals-filter-pills" id="dealsFilterPills">
+          <button class="pill active" data-filter="all">All Offers</button>
+          <button class="pill" data-filter="codes">Promo Codes</button>
+          <button class="pill" data-filter="sales">Sales &amp; Deals</button>
+        </div>
       </div>
+      
+      <div class="deal-grid" id="dealGrid">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </div>
+  </section>
 
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-card__number">01</div>
-          <div class="step-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+  <!-- Popular Categories Accordion -->
+  <section class="landing-links-section" id="categories">
+    <div class="container">
+      <div class="accordion-container">
+        <div class="accordion is-open" id="categoryAccordion">
+          <button class="accordion__trigger" id="accordionTrigger" type="button">
+            <h2 class="accordion__title">Popular Categories</h2>
+            <span class="accordion__icon"></span>
+          </button>
+          <div class="accordion__content" id="accordionContent">
+            <div class="accordion__grid">
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="beauty">Beauty &amp; Skincare</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="fashion">Women's Clothing</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="fashion">Shoes &amp; Footwear</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="electronics">Electronics &amp; Tech</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="fashion">Men's Fashion</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="fashion">Bags &amp; Accessories</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="beauty">Makeup &amp; Cosmetics</a></h3>
+              <h3 class="accordion__item"><a class="accordion__link" href="#deals" data-category="fashion">Activewear &amp; Sports</a></h3>
+            </div>
           </div>
-          <h3>Find Your Store</h3>
-          <p>Search or browse our store list and pick an active promo code or deal.</p>
-        </div>
-
-        <div class="step-card">
-          <div class="step-card__number">02</div>
-          <div class="step-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-          </div>
-          <h3>Copy The Promo Code</h3>
-          <p>Click "Get Code" to reveal and copy the promo code to your clipboard.</p>
-        </div>
-
-        <div class="step-card">
-          <div class="step-card__number">03</div>
-          <div class="step-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-          <h3>Paste &amp; Save</h3>
-          <p>Paste the coupon code during checkout at the store to apply your discount.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter Signup -->
+  <!-- Newsletter Section (Yellow Feature Box) -->
   <section class="newsletter-section">
-    <div class="container newsletter-container">
-      <div class="newsletter-content">
-        <span class="newsletter-tag">Email Updates</span>
-        <h2>Get Latest Promo Codes In Your Inbox</h2>
-        <p>Subscribe to receive verified coupon updates when new store offers become available.</p>
+    <div class="newsletter-section__container">
+      <div class="newsletter-section__visual">
+        <div class="newsletter-icon-wrap">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4c1fa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <h3>Never Miss A Deal</h3>
+        <p>Get active discounts delivered straight to your email.</p>
       </div>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" placeholder="Enter your email address..." required id="newsletterEmail">
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
+      <div class="newsletter-section__content">
+        <h2 class="newsletter-section__title">Get Exclusive Coupons In Your Inbox</h2>
+        <p class="newsletter-section__desc">Be the first to receive verified codes and savings updates for top brands.</p>
+        <form id="newsletterForm" class="newsletter-section__form">
+          <input type="email" name="email" id="newsletterEmail" placeholder="Enter your email address" required>
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        </form>
+        <p class="newsletter-section__disclaimer">
+          By subscribing, you agree to receive promotional email alerts. You can unsubscribe at any time.
+          <a href="#" id="newsletterPrivacyLink"><u>Privacy Policy</u></a>.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- About Section -->
+  <section class="text-section" id="about">
+    <div class="container">
+      <h2 class="text-section__title">About PromoBella</h2>
+      <div class="text-section__body">
+        <p>PromoBella is created to be your clean, dependable destination for saving money when shopping online. We curate and verify promo codes and discount offers for popular brands so you can apply discounts easily at checkout.</p>
+        <p>Our focus is on simplicity and transparency: no clutter, no fake codes, and direct access to active store deals in fashion, beauty, electronics, and lifestyle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
   <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#" class="brand-logo footer-logo">
-            <div class="brand-logo__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="site-footer__top">
+      <div class="container">
+        <div class="site-footer__brand">
+          <span class="site-footer__logo">
+            <div class="brand-badge small">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                 <line x1="7" y1="7" x2="7.01" y2="7"></line>
               </svg>
             </div>
-            <span class="brand-logo__text">Her<span>PromoCodes</span></span>
-          </a>
-          <p class="footer-about">
-            HerPromoCodes provides verified discount coupons and promotional offers for online stores to help shoppers save on their orders.
-          </p>
+            <span class="footer-logo-text">Promo<span>Bella</span></span>
+          </span>
+          <p class="footer-tagline">Helping smart shoppers save with verified promo codes daily.</p>
         </div>
-
-        <div class="footer-links-group">
-          <h4>Categories</h4>
-          <ul>
-            <li><a href="#deals" class="footer-filter-link" data-category="fashion">Fashion &amp; Clothing</a></li>
-            <li><a href="#deals" class="footer-filter-link" data-category="beauty">Beauty &amp; Makeup</a></li>
-            <li><a href="#deals" class="footer-filter-link" data-category="electronics">Electronics &amp; Tech</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links-group">
-          <h4>Popular Stores</h4>
-          <ul>
-            <li><a href="#deals" class="footer-store-link" data-store="Sephora">Sephora Coupons</a></li>
-            <li><a href="#deals" class="footer-store-link" data-store="Nike">Nike Discount Codes</a></li>
-            <li><a href="#deals" class="footer-store-link" data-store="Zara">Zara Promo Offers</a></li>
-            <li><a href="#deals" class="footer-store-link" data-store="ASOS">ASOS Vouchers</a></li>
-            <li><a href="#deals" class="footer-store-link" data-store="Amazon">Amazon Promo Codes</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links-group">
-          <h4>Legal &amp; Policies</h4>
-          <p class="footer-text-muted">We respect your privacy and provide transparent information about our practices.</p>
-          <div class="footer-action-buttons">
-            <button class="footer-modal-btn" id="openPrivacyBtn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              Privacy Policy
-            </button>
-            <button class="footer-modal-btn" id="openCookiesBtn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 0-1.9 19.8"></path><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="16" cy="11" r="1"></circle><circle cx="11" cy="15" r="1"></circle></svg>
-              Cookies Policy
-            </button>
-            <button class="footer-modal-btn secondary" id="openCookieSettingsBtn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-              Cookie Preferences
-            </button>
+        <div class="site-footer__columns">
+          <div class="site-footer__column">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#stores">Popular Stores</a></li>
+              <li><a href="#deals">Top Deals</a></li>
+              <li><a href="#categories">Browse Categories</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__column">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="#about">About PromoBella</a></li>
+              <li><a href="#about">How It Works</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__column">
+            <h4>Legal &amp; Policies</h4>
+            <div class="footer-policy-actions">
+              <button type="button" class="footer-btn" id="openPrivacyBtn">Privacy Policy</button>
+              <button type="button" class="footer-btn" id="openCookiesBtn">Cookies Policy</button>
+              <button type="button" class="footer-btn secondary" id="openCookieSettingsBtn">Cookie Preferences</button>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        <p>&copy; <span id="currentYear">2026</span> HerPromoCodes.com. All rights reserved. Third-party trademarks belong to their respective owners.</p>
-        <div class="footer-bottom-links">
-          <button class="inline-link-btn" id="inlinePrivacyBtn">Privacy Policy</button>
-          <span>•</span>
-          <button class="inline-link-btn" id="inlineCookiesBtn">Cookies Policy</button>
-          <span>•</span>
-          <button class="inline-link-btn" id="inlineTermsBtn">Terms of Service</button>
-        </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; 2026 PromoBella. All rights reserved.</p>
+      <div class="site-footer__fineprint-link">
+        <a href="#stores">Stores</a>
+        | <a href="#deals">Top Deals</a>
+        | <a href="#" id="fineprintPrivacyBtn">Privacy Policy</a>
+        | <a href="#" id="fineprintCookiesBtn">Cookies Policy</a>
       </div>
     </div>
   </footer>
 
-  <!-- ================= MODALS ================= -->
+  <!-- ==================== MODALS ==================== -->
 
   <!-- 1. Coupon Revealed Modal -->
-  <div class="modal-overlay" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="couponModalTitle">
-    <div class="modal-box modal-coupon">
-      <button class="modal-close-btn" id="closeCouponModal" aria-label="Close modal">&times;</button>
-      <div class="modal-coupon__header">
-        <div class="modal-store-avatar" id="modalStoreAvatar">ST</div>
-        <div>
-          <span class="modal-badge-verified">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Verified Promo Code
-          </span>
-          <h3 class="modal-title" id="couponModalTitle">25% Off Sitewide Coupon</h3>
-        </div>
+  <div id="couponSuccessModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-dialog">
+      <div class="custom-modal-header">
+        <h3 id="modalStoreTitle">Promo Code Revealed</h3>
+        <button type="button" class="custom-modal-close" id="closeCouponModal" aria-label="Close modal">&times;</button>
       </div>
-
-      <div class="modal-coupon__body">
-        <p class="modal-coupon__desc" id="couponModalDesc">Copy this code and paste it at checkout to apply your discount.</p>
-        
-        <div class="code-reveal-box">
-          <div class="code-reveal-text" id="revealedCodeText">HER25SAVE</div>
-          <button class="copy-action-btn" id="modalCopyBtn">
-            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            <span id="copyBtnLabel">Copy Code</span>
-          </button>
-        </div>
-
-        <div class="coupon-instructions">
-          <div class="instr-step">
-            <span>1</span> Code copied automatically to clipboard!
-          </div>
-          <div class="instr-step">
-            <span>2</span> Go to <strong id="modalStoreName">Sephora</strong> and paste code during checkout.
+      <div class="custom-modal-body">
+        <div class="modal-deal-info">
+          <p class="modal-deal-title" id="modalDealTitle">Discount Offer</p>
+          <div class="coupon-code-container">
+            <span class="revealed-code" id="modalCodeText">PROMO20</span>
+            <button type="button" class="copy-btn" id="copyCodeBtn">Copy Code</button>
           </div>
         </div>
-
-        <div class="modal-coupon__actions">
-          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" id="modalVisitStoreBtn">
-            Continue To Store
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </a>
-        </div>
+        <p class="modal-instructions">Code copied! Paste this code in the promo box at <strong id="modalStoreNameText">Store</strong> during checkout.</p>
+      </div>
+      <div class="custom-modal-footer">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="custom-modal-ok" id="modalStoreUrlBtn">Go to Store &rarr;</a>
       </div>
     </div>
   </div>
 
   <!-- 2. Privacy Policy Modal -->
-  <div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
-    <div class="modal-box modal-content-doc">
-      <div class="modal-doc-header">
-        <div class="doc-header-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        </div>
-        <div>
-          <h3 class="modal-title" id="privacyModalTitle">Privacy Policy</h3>
-          <p class="modal-subtitle">Effective Date: November 2026 | Last updated</p>
-        </div>
-        <button class="modal-close-btn" id="closePrivacyModal" aria-label="Close modal">&times;</button>
+  <div id="privacyModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-dialog doc-dialog">
+      <div class="custom-modal-header">
+        <h3>Privacy Policy</h3>
+        <button type="button" class="custom-modal-close" id="closePrivacyModal">&times;</button>
       </div>
-
-      <div class="modal-doc-body">
-        <h4>1. Introduction</h4>
-        <p>Welcome to <strong>HerPromoCodes.com</strong>. We take your privacy seriously. This Privacy Policy describes how we collect, use, and protect your information when you visit our website, search for coupons, or sign up for our newsletter.</p>
-
-        <h4>2. Information We Collect</h4>
-        <p>HerPromoCodes is designed to offer free coupon codes without requiring mandatory registration. We only collect:</p>
-        <ul>
-          <li><strong>Voluntary Information:</strong> Email address when you subscribe to receive promo code notifications or deal alerts.</li>
-          <li><strong>Usage &amp; Analytics Data:</strong> Anonymous browsing metrics, including pages visited, clicked coupons, browser type, and referrer URLs to improve deal accuracy.</li>
-          <li><strong>Cookies &amp; Local Storage:</strong> Preferences like saved deals, coupon copy history, and cookie preferences.</li>
-        </ul>
-
-        <h4>3. How We Use Your Information</h4>
-        <p>The information we collect is strictly used to:</p>
-        <ul>
-          <li>Deliver requested coupons, discounts, and promotional updates.</li>
-          <li>Verify whether coupons are functioning properly and remove expired offers.</li>
-          <li>Ensure website speed, security, and spam prevention.</li>
-        </ul>
-
-        <h4>4. Affiliate Disclosure &amp; Outbound Links</h4>
-        <p>HerPromoCodes contains links to merchant partner websites. When you click on a store offer and make a purchase, we may earn an affiliate commission at no extra cost to you. We do not share your private data with merchants.</p>
-
-        <h4>5. Data Protection &amp; Security</h4>
-        <p>We employ modern encryption protocols (HTTPS/SSL) to protect any data submitted. We never sell, rent, or trade your personal email or data to third-party marketing companies.</p>
-
-        <h4>6. Your Rights &amp; Contact Us</h4>
-        <p>You may unsubscribe from email updates at any time with one click. If you have questions regarding this Privacy Policy, please contact our support team at <strong>privacy@herpromocodes.com</strong>.</p>
+      <div class="custom-modal-body doc-body">
+        <h4>1. Information We Collect</h4>
+        <p>PromoBella respects your privacy. When you subscribe to our newsletter, we store your email address solely to deliver requested coupon updates. We do not sell or trade your personal data.</p>
+        <h4>2. Affiliate Links Disclosure</h4>
+        <p>PromoBella features links to merchant partners. If you click on a store offer and make a purchase, we may receive an affiliate commission at no extra cost to you.</p>
+        <h4>3. Your Choices</h4>
+        <p>You can opt out of newsletter emails at any time by clicking the unsubscribe link in any message.</p>
       </div>
-
-      <div class="modal-doc-footer">
-        <button class="btn btn-secondary" id="closePrivacyFooterBtn">Close</button>
+      <div class="custom-modal-footer">
+        <button type="button" class="custom-modal-ok" id="closePrivacyFooterBtn">Close</button>
       </div>
     </div>
   </div>
 
   <!-- 3. Cookies Policy Modal -->
-  <div class="modal-overlay" id="cookiesModal" role="dialog" aria-modal="true" aria-labelledby="cookiesModalTitle">
-    <div class="modal-box modal-content-doc">
-      <div class="modal-doc-header">
-        <div class="doc-header-icon cookie-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 0-1.9 19.8"></path><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="16" cy="11" r="1"></circle><circle cx="11" cy="15" r="1"></circle></svg>
-        </div>
-        <div>
-          <h3 class="modal-title" id="cookiesModalTitle">Cookies &amp; Tracking Policy</h3>
-          <p class="modal-subtitle">How we use cookies to provide the best deal experience</p>
-        </div>
-        <button class="modal-close-btn" id="closeCookiesModal" aria-label="Close modal">&times;</button>
+  <div id="cookiesModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-dialog doc-dialog">
+      <div class="custom-modal-header">
+        <h3>Cookies Policy</h3>
+        <button type="button" class="custom-modal-close" id="closeCookiesModal">&times;</button>
       </div>
-
-      <div class="modal-doc-body">
-        <h4>1. What Are Cookies?</h4>
-        <p>Cookies are small text files stored on your computer or mobile device when you visit a website. They allow the website to remember your preferences (such as copied promo codes or category filters) and provide a smooth browsing experience.</p>
-
-        <h4>2. Types of Cookies We Use</h4>
-        <div class="cookie-type-block">
-          <strong>🔒 Essential &amp; Functional Cookies (Strictly Necessary)</strong>
-          <p>These are necessary for the website to operate correctly, remember your cookie consent preferences, and ensure modal windows function properly.</p>
-        </div>
-
-        <div class="cookie-type-block">
-          <strong>📊 Performance &amp; Analytics Cookies</strong>
-          <p>Help us understand which coupons are most popular, which stores get visited, and how to improve site speed and interface performance.</p>
-        </div>
-
-        <div class="cookie-type-block">
-          <strong>🛍️ Affiliate &amp; Referral Cookies</strong>
-          <p>When you click "Get Code" or "Get Deal", a referral cookie may be set by the affiliate merchant network so the store recognizes you came from HerPromoCodes. This does not track personal identifying information.</p>
-        </div>
-
-        <h4>3. Managing Your Cookies</h4>
-        <p>You can manage or disable cookies at any time through your browser settings or directly via our Cookie Preferences popup on this page.</p>
+      <div class="custom-modal-body doc-body">
+        <h4>What Are Cookies?</h4>
+        <p>Cookies are small text files stored in your web browser that allow PromoBella to remember your preferences (such as cookie consent and filter choices).</p>
+        <h4>Cookies Used on PromoBella</h4>
+        <ul>
+          <li><strong>Essential Cookies:</strong> Required for site operation, search filters, and dialog functions.</li>
+          <li><strong>Affiliate Cookies:</strong> Set by merchant partner networks when you click a coupon to ensure discounts are applied properly.</li>
+        </ul>
       </div>
-
-      <div class="modal-doc-footer">
-        <button class="btn btn-primary" id="openSettingsFromCookiesBtn">Manage Cookie Preferences</button>
-        <button class="btn btn-secondary" id="closeCookiesFooterBtn">Got It</button>
+      <div class="custom-modal-footer">
+        <button type="button" class="custom-modal-ok" id="closeCookiesFooterBtn">Got It</button>
       </div>
     </div>
   </div>
 
-  <!-- 4. Cookie Preferences / Settings Modal -->
-  <div class="modal-overlay" id="cookieSettingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
-    <div class="modal-box modal-settings">
-      <div class="modal-doc-header">
-        <div>
-          <h3 class="modal-title" id="settingsModalTitle">Cookie Preferences</h3>
-          <p class="modal-subtitle">Customize which cookies you want to allow on HerPromoCodes</p>
-        </div>
-        <button class="modal-close-btn" id="closeCookieSettingsModal" aria-label="Close modal">&times;</button>
+  <!-- 4. Cookie Preferences Modal -->
+  <div id="cookieSettingsModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-dialog doc-dialog">
+      <div class="custom-modal-header">
+        <h3>Cookie Preferences</h3>
+        <button type="button" class="custom-modal-close" id="closeCookieSettingsModal">&times;</button>
       </div>
-
-      <div class="modal-settings-body">
-        <div class="setting-item">
-          <div class="setting-item__info">
+      <div class="custom-modal-body">
+        <div class="cookie-toggle-row">
+          <div>
             <strong>Essential Cookies</strong>
-            <span>Required for website functionality, security, and search filters. Always active.</span>
+            <p>Necessary for basic functionality. Always active.</p>
           </div>
-          <label class="toggle-switch">
-            <input type="checkbox" checked disabled>
-            <span class="slider disabled"></span>
-          </label>
+          <input type="checkbox" checked disabled>
         </div>
-
-        <div class="setting-item">
-          <div class="setting-item__info">
+        <div class="cookie-toggle-row">
+          <div>
             <strong>Analytics &amp; Performance</strong>
-            <span>Helps us see which discount codes are working and improve user experience.</span>
+            <p>Helps us understand which coupons and stores are most helpful.</p>
           </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="prefAnalytics" checked>
-            <span class="slider"></span>
-          </label>
-        </div>
-
-        <div class="setting-item">
-          <div class="setting-item__info">
-            <strong>Marketing &amp; Affiliate Deals</strong>
-            <span>Allows merchant stores to credit discount activations and deliver personalized deals.</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="prefMarketing" checked>
-            <span class="slider"></span>
-          </label>
+          <input type="checkbox" id="prefAnalyticsToggle" checked>
         </div>
       </div>
-
-      <div class="modal-doc-footer space-between">
-        <button class="btn btn-outline" id="acceptAllCookiesModalBtn">Accept All</button>
-        <button class="btn btn-primary" id="saveCookiePreferencesBtn">Save Preferences</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Submit Coupon Modal -->
-  <div class="modal-overlay" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
-    <div class="modal-box modal-submit">
-      <div class="modal-doc-header">
-        <div>
-          <h3 class="modal-title" id="submitModalTitle">Share A Coupon</h3>
-          <p class="modal-subtitle">Found a working promo code? Help fellow shoppers save!</p>
-        </div>
-        <button class="modal-close-btn" id="closeSubmitModal" aria-label="Close modal">&times;</button>
-      </div>
-
-      <form id="submitCouponForm" class="submit-form">
-        <div class="form-group">
-          <label for="submitStore">Store / Merchant Name *</label>
-          <input type="text" id="submitStore" placeholder="e.g. Zara, Sephora, Nike" required>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="submitCode">Coupon Code *</label>
-            <input type="text" id="submitCode" placeholder="e.g. SAVE25" required>
-          </div>
-          <div class="form-group">
-            <label for="submitDiscount">Discount Amount *</label>
-            <input type="text" id="submitDiscount" placeholder="e.g. 20% OFF or $15 OFF" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="submitDesc">Offer Details</label>
-          <input type="text" id="submitDesc" placeholder="e.g. Valid on sitewide orders over $50">
-        </div>
-        <div class="form-group">
-          <label for="submitCategory">Category</label>
-          <select id="submitCategory">
-            <option value="fashion">Fashion &amp; Apparel</option>
-            <option value="beauty">Beauty &amp; Makeup</option>
-            <option value="electronics">Electronics &amp; Tech</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Promo Code</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- 6. Floating Cookie Consent Banner -->
-  <div class="cookie-banner" id="cookieBanner">
-    <div class="container cookie-banner__container">
-      <div class="cookie-banner__text">
-        <span class="cookie-emoji">🍪</span>
-        <p>
-          We use cookies to improve your coupon search experience, analyze site usage, and verify discount codes. By clicking "Accept All", you agree to our 
-          <button class="banner-link-btn" id="bannerPrivacyBtn">Privacy Policy</button> &amp; 
-          <button class="banner-link-btn" id="bannerCookiesBtn">Cookies Policy</button>.
-        </p>
-      </div>
-      <div class="cookie-banner__actions">
-        <button class="btn btn-sm btn-outline" id="bannerPreferencesBtn">Preferences</button>
-        <button class="btn btn-sm btn-outline" id="bannerDeclineBtn">Decline</button>
-        <button class="btn btn-sm btn-primary" id="bannerAcceptBtn">Accept All</button>
+      <div class="custom-modal-footer">
+        <button type="button" class="custom-modal-ok" id="saveCookieSettingsBtn">Save Preferences</button>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div class="toast-notification" id="toast">
-    <div class="toast-icon">✓</div>
-    <div class="toast-message" id="toastMessage">Code copied to clipboard!</div>
-  </div>
+  <div id="toastMessage" class="toast">Code copied to clipboard!</div>
 
   <script src="script.js"></script>
 </body>

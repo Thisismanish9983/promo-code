@@ -1,732 +1,578 @@
 /**
- * HerPromoCodes - Main JavaScript
- * Handles coupon rendering, live search, filtering, modals, clipboard copying & cookie consent
+ * PromoBella - Main Interactive Script
+ * Features:
+ * - 10 Verified Stores with custom brand graphics
+ * - 10 Top Deals with "Show Code" folded corner buttons
+ * - Instant Live Search & Filter Pills
+ * - Modal Dialogues (Code reveal, Privacy, Cookies)
+ * - Accordion Toggle & 1-Click Clipboard Copy
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 1. Data: Stores & Active Deals/Coupons (10 Top Brands)
+  // 1. Data: 10 Stores
   // ==========================================
-  const storesData = [
-    { id: 'sephora', name: 'Sephora', count: 'Beauty & Skincare', initial: 'SP', color: '#000000', category: 'beauty' },
-    { id: 'nike', name: 'Nike', count: 'Shoes & Sportswear', initial: 'NK', color: '#f59e0b', category: 'fashion' },
-    { id: 'zara', name: 'Zara', count: 'Clothing & Fashion', initial: 'ZR', color: '#111827', category: 'fashion' },
-    { id: 'asos', name: 'ASOS', count: 'Trending Outfits', initial: 'AS', color: '#f43f5e', category: 'fashion' },
-    { id: 'ulta', name: 'Ulta Beauty', count: 'Makeup & Haircare', initial: 'UB', color: '#e11d48', category: 'beauty' },
-    { id: 'amazon', name: 'Amazon', count: 'Online Retail', initial: 'AZ', color: '#ff9900', category: 'electronics' },
-    { id: 'glossier', name: 'Glossier', count: 'Clean Cosmetics', initial: 'GL', color: '#ec4899', category: 'beauty' },
-    { id: 'shein', name: 'Shein', count: 'Fashion & Outfits', initial: 'SH', color: '#8b5cf6', category: 'fashion' },
-    { id: 'apple', name: 'Apple', count: 'Tech & Devices', initial: 'AP', color: '#64748b', category: 'electronics' },
-    { id: 'nordstrom', name: 'Nordstrom', count: 'Designer Styles', initial: 'ND', color: '#4338ca', category: 'fashion' }
+  const stores = [
+    {
+      id: 'amazon',
+      name: 'Amazon',
+      initial: 'AMZ',
+      bgColor: '#ff9900',
+      category: 'electronics'
+    },
+    {
+      id: 'nike',
+      name: 'Nike',
+      initial: 'NIKE',
+      bgColor: '#111111',
+      category: 'fashion'
+    },
+    {
+      id: 'sephora',
+      name: 'Sephora',
+      initial: 'SEPH',
+      bgColor: '#000000',
+      category: 'beauty'
+    },
+    {
+      id: 'zara',
+      name: 'Zara',
+      initial: 'ZARA',
+      bgColor: '#222222',
+      category: 'fashion'
+    },
+    {
+      id: 'asos',
+      name: 'ASOS',
+      initial: 'ASOS',
+      bgColor: '#f43f5e',
+      category: 'fashion'
+    },
+    {
+      id: 'ulta',
+      name: 'Ulta Beauty',
+      initial: 'ULTA',
+      bgColor: '#e11d48',
+      category: 'beauty'
+    },
+    {
+      id: 'glossier',
+      name: 'Glossier',
+      initial: 'GLOS',
+      bgColor: '#ec4899',
+      category: 'beauty'
+    },
+    {
+      id: 'shein',
+      name: 'Shein',
+      initial: 'SHEIN',
+      bgColor: '#7c3aed',
+      category: 'fashion'
+    },
+    {
+      id: 'apple',
+      name: 'Apple',
+      initial: 'APPLE',
+      bgColor: '#475569',
+      category: 'electronics'
+    },
+    {
+      id: 'nordstrom',
+      name: 'Nordstrom',
+      initial: 'NORD',
+      bgColor: '#2563eb',
+      category: 'fashion'
+    }
   ];
 
-  const dealsData = [
+  // ==========================================
+  // 2. Data: 10 Top Deals
+  // ==========================================
+  const deals = [
     {
       id: 1,
-      store: 'Sephora',
-      storeInitial: 'SP',
+      storeId: 'sephora',
+      storeName: 'Sephora',
       type: 'code',
-      code: 'HERGLOW20',
-      discount: '20% OFF',
-      title: '20% Off Orders $50+ Sitewide',
-      desc: 'Get 20% discount on skincare, makeup, and fragrances with this promo code.',
-      category: 'beauty',
-      verified: 'Verified Code',
-      expires: 'Limited Time Offer',
-      storeUrl: 'https://www.sephora.com'
+      code: 'BEAUTY20',
+      cornerText: 'BEA',
+      title: '20% Off Sitewide Orders $50+',
+      url: 'https://www.sephora.com',
+      category: 'beauty'
     },
     {
       id: 2,
-      store: 'Nike',
-      storeInitial: 'NK',
+      storeId: 'nike',
+      storeName: 'Nike',
       type: 'code',
-      code: 'JUSTSAVE25',
-      discount: '25% OFF',
-      title: '25% Off Select Sneakers & Sportswear',
-      desc: 'Save 25% on selected running shoes, athletic apparel, and accessories.',
-      category: 'fashion',
-      verified: 'Verified Code',
-      expires: 'Special Offer',
-      storeUrl: 'https://www.nike.com'
+      code: 'RUNFAST25',
+      cornerText: 'RUN',
+      title: '25% Off Select Sneaker Styles',
+      url: 'https://www.nike.com',
+      category: 'fashion'
     },
     {
       id: 3,
-      store: 'Ulta Beauty',
-      storeInitial: 'UB',
-      type: 'code',
-      code: 'ULTAMAGIC',
-      discount: '$15 OFF',
-      title: '$15 Off $50 Order Sitewide',
-      desc: 'Apply promo code during checkout for $15 savings on makeup and haircare.',
-      category: 'beauty',
-      verified: 'Verified Code',
-      expires: 'Active Promo',
-      storeUrl: 'https://www.ulta.com'
+      storeId: 'zara',
+      storeName: 'Zara',
+      type: 'deal',
+      code: '',
+      cornerText: '',
+      title: 'Up to 50% Off Seasonal Sale',
+      url: 'https://www.zara.com',
+      category: 'fashion'
     },
     {
       id: 4,
-      store: 'Zara',
-      storeInitial: 'ZR',
-      type: 'deal',
-      code: '',
-      discount: 'UP TO 50% OFF',
-      title: 'Seasonal Fashion Sale',
-      desc: 'Save up to 50% on women coats, dresses, blazers, and shoes. Direct store deal.',
-      category: 'fashion',
-      verified: 'Active Deal',
-      expires: 'Ongoing Deal',
-      storeUrl: 'https://www.zara.com'
+      storeId: 'asos',
+      storeName: 'ASOS',
+      type: 'code',
+      code: 'ASOSSAVE30',
+      cornerText: 'ASO',
+      title: '$30 Off Orders Over $120',
+      url: 'https://www.asos.com',
+      category: 'fashion'
     },
     {
       id: 5,
-      store: 'ASOS',
-      storeInitial: 'AS',
+      storeId: 'ulta',
+      storeName: 'Ulta Beauty',
       type: 'code',
-      code: 'ASOSHER30',
-      discount: '$30 OFF',
-      title: '$30 Off Orders Over $120',
-      desc: 'Enjoy $30 off on trending party wear, streetwear, and footwear collection.',
-      category: 'fashion',
-      verified: 'Verified Code',
-      expires: 'Limited Time Offer',
-      storeUrl: 'https://www.asos.com'
+      code: 'ULTAMAGIC',
+      cornerText: 'ULT',
+      title: '$15 Off $50 Order Sitewide',
+      url: 'https://www.ulta.com',
+      category: 'beauty'
     },
     {
       id: 6,
-      store: 'Amazon',
-      storeInitial: 'AZ',
+      storeId: 'amazon',
+      storeName: 'Amazon',
       type: 'code',
-      code: 'PRIMEBEAUTY',
-      discount: '$10 OFF',
+      code: 'PRIME10OFF',
+      cornerText: 'PRI',
       title: '$10 Off Luxury Beauty Order',
-      desc: 'Get $10 promotional savings on your first eligible premium beauty purchase.',
-      category: 'electronics',
-      verified: 'Verified Code',
-      expires: 'Active Promo',
-      storeUrl: 'https://www.amazon.com'
+      url: 'https://www.amazon.com',
+      category: 'electronics'
     },
     {
       id: 7,
-      store: 'Glossier',
-      storeInitial: 'GL',
+      storeId: 'glossier',
+      storeName: 'Glossier',
       type: 'code',
-      code: 'GLOWWITHHER',
-      discount: '15% OFF',
-      title: '15% Off Your First Purchase',
-      desc: 'Save 15% on bestselling skincare sets, lip glosses, and beauty essentials.',
-      category: 'beauty',
-      verified: 'Verified Code',
-      expires: 'First Order Offer',
-      storeUrl: 'https://www.glossier.com'
+      code: 'GLOWFIRST15',
+      cornerText: 'GLO',
+      title: '15% Off Your Entire First Purchase',
+      url: 'https://www.glossier.com',
+      category: 'beauty'
     },
     {
       id: 8,
-      store: 'Shein',
-      storeInitial: 'SH',
+      storeId: 'shein',
+      storeName: 'Shein',
       type: 'code',
-      code: 'SHEINHER20',
-      discount: '20% OFF',
+      code: 'SHEINLOVE20',
+      cornerText: 'SHE',
       title: '20% Off Orders Over $69',
-      desc: 'Apply promo code for 20% off modern fashion apparel, shoes, and accessories.',
-      category: 'fashion',
-      verified: 'Verified Code',
-      expires: 'Active Promo',
-      storeUrl: 'https://www.shein.com'
+      url: 'https://www.shein.com',
+      category: 'fashion'
     },
     {
       id: 9,
-      store: 'Apple',
-      storeInitial: 'AP',
+      storeId: 'apple',
+      storeName: 'Apple',
       type: 'deal',
       code: '',
-      discount: 'UP TO $250 OFF',
-      title: 'Trade-In Credit Offer',
-      desc: 'Get up to $250 promotional trade-in value on eligible Mac and iPad upgrades.',
-      category: 'electronics',
-      verified: 'Active Deal',
-      expires: 'Ongoing Offer',
-      storeUrl: 'https://www.apple.com'
+      cornerText: '',
+      title: 'Up to $250 Off Trade-in Special',
+      url: 'https://www.apple.com',
+      category: 'electronics'
     },
     {
       id: 10,
-      store: 'Nordstrom',
-      storeInitial: 'ND',
+      storeId: 'nordstrom',
+      storeName: 'Nordstrom',
       type: 'code',
-      code: 'NORDHER15',
-      discount: '15% OFF',
-      title: '15% Off Designer Bags & Footwear',
-      desc: 'Save 15% on qualifying luxury brand handbags, heels, and accessories.',
-      category: 'fashion',
-      verified: 'Verified Code',
-      expires: 'Special Offer',
-      storeUrl: 'https://www.nordstrom.com'
+      code: 'NORDLUX15',
+      cornerText: 'NOR',
+      title: '15% Off Designer Bags & Shoes',
+      url: 'https://www.nordstrom.com',
+      category: 'fashion'
     }
   ];
 
-  // State management
-  let currentCategory = 'all';
-  let currentType = 'all';
+  // State Management
+  let activeStoreFilter = null;
+  let activeTypeFilter = 'all'; // 'all', 'codes', 'sales'
+  let activeCategoryFilter = null;
   let searchQuery = '';
-  let selectedStoreFilter = '';
 
   // DOM Elements
-  const storesGrid = document.getElementById('storesGrid');
-  const dealsGrid = document.getElementById('dealsGrid');
-  const dealCountEl = document.getElementById('dealCount');
-  const noResultsEl = document.getElementById('noResults');
-  const searchInput = document.getElementById('searchInput');
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const searchSubmitBtn = document.getElementById('searchSubmitBtn');
-  const resetStoreFilter = document.getElementById('resetStoreFilter');
-  const resetAllFiltersBtn = document.getElementById('resetAllFiltersBtn');
+  const storeGridEl = document.getElementById('storeGrid');
+  const dealGridEl = document.getElementById('dealGrid');
+  const searchInput = document.getElementById('searchKey');
+  const searchBtn = document.getElementById('searchBtn');
+  const filterPills = document.querySelectorAll('.deals-filter-pills .pill');
+  const toastEl = document.getElementById('toastMessage');
 
-  // Modals & Elements
-  const couponModal = document.getElementById('couponModal');
-  const closeCouponModal = document.getElementById('closeCouponModal');
-  const modalStoreAvatar = document.getElementById('modalStoreAvatar');
-  const couponModalTitle = document.getElementById('couponModalTitle');
-  const couponModalDesc = document.getElementById('couponModalDesc');
-  const revealedCodeText = document.getElementById('revealedCodeText');
-  const modalCopyBtn = document.getElementById('modalCopyBtn');
-  const copyBtnLabel = document.getElementById('copyBtnLabel');
-  const modalStoreName = document.getElementById('modalStoreName');
-  const modalVisitStoreBtn = document.getElementById('modalVisitStoreBtn');
+  // Modal Elements
+  const couponModal = document.getElementById('couponSuccessModal');
+  const closeCouponModalBtn = document.getElementById('closeCouponModal');
+  const modalStoreTitle = document.getElementById('modalStoreTitle');
+  const modalDealTitle = document.getElementById('modalDealTitle');
+  const modalCodeText = document.getElementById('modalCodeText');
+  const copyCodeBtn = document.getElementById('copyCodeBtn');
+  const modalStoreNameText = document.getElementById('modalStoreNameText');
+  const modalStoreUrlBtn = document.getElementById('modalStoreUrlBtn');
 
-  // Policy Modals Elements
+  // Footer Policy Buttons & Modals
   const privacyModal = document.getElementById('privacyModal');
+  const cookiesModal = document.getElementById('cookiesModal');
+  const cookieSettingsModal = document.getElementById('cookieSettingsModal');
+
   const openPrivacyBtn = document.getElementById('openPrivacyBtn');
+  const openCookiesBtn = document.getElementById('openCookiesBtn');
+  const openCookieSettingsBtn = document.getElementById('openCookieSettingsBtn');
+  const fineprintPrivacyBtn = document.getElementById('fineprintPrivacyBtn');
+  const fineprintCookiesBtn = document.getElementById('fineprintCookiesBtn');
+  const newsletterPrivacyLink = document.getElementById('newsletterPrivacyLink');
+
   const closePrivacyModal = document.getElementById('closePrivacyModal');
   const closePrivacyFooterBtn = document.getElementById('closePrivacyFooterBtn');
-  const inlinePrivacyBtn = document.getElementById('inlinePrivacyBtn');
-  const bannerPrivacyBtn = document.getElementById('bannerPrivacyBtn');
-
-  const cookiesModal = document.getElementById('cookiesModal');
-  const openCookiesBtn = document.getElementById('openCookiesBtn');
   const closeCookiesModal = document.getElementById('closeCookiesModal');
   const closeCookiesFooterBtn = document.getElementById('closeCookiesFooterBtn');
-  const inlineCookiesBtn = document.getElementById('inlineCookiesBtn');
-  const bannerCookiesBtn = document.getElementById('bannerCookiesBtn');
-  const openSettingsFromCookiesBtn = document.getElementById('openSettingsFromCookiesBtn');
-
-  const cookieSettingsModal = document.getElementById('cookieSettingsModal');
-  const openCookieSettingsBtn = document.getElementById('openCookieSettingsBtn');
   const closeCookieSettingsModal = document.getElementById('closeCookieSettingsModal');
-  const acceptAllCookiesModalBtn = document.getElementById('acceptAllCookiesModalBtn');
-  const saveCookiePreferencesBtn = document.getElementById('saveCookiePreferencesBtn');
-  const bannerPreferencesBtn = document.getElementById('bannerPreferencesBtn');
+  const saveCookieSettingsBtn = document.getElementById('saveCookieSettingsBtn');
 
-  const submitModal = document.getElementById('submitModal');
-  const openSubmitModal = document.getElementById('openSubmitModal');
-  const closeSubmitModal = document.getElementById('closeSubmitModal');
-  const submitCouponForm = document.getElementById('submitCouponForm');
-
-  const cookieBanner = document.getElementById('cookieBanner');
-  const bannerAcceptBtn = document.getElementById('bannerAcceptBtn');
-  const bannerDeclineBtn = document.getElementById('bannerDeclineBtn');
-
-  const toast = document.getElementById('toast');
-  const toastMessage = document.getElementById('toastMessage');
+  // Mobile Drawer
   const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
-
-  // Set Current Year in Footer
-  const currentYearEl = document.getElementById('currentYear');
-  if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileCloseBtn = document.getElementById('mobileCloseBtn');
 
   // ==========================================
-  // 2. Render Functions
+  // 3. Render Stores
   // ==========================================
-
-  // Render Stores Grid
   function renderStores() {
-    if (!storesGrid) return;
-    storesGrid.innerHTML = storesData.map(store => `
-      <div class="store-card ${selectedStoreFilter.toLowerCase() === store.name.toLowerCase() ? 'selected' : ''}" data-store="${store.name}">
-        <div class="store-card__logo">${store.initial}</div>
-        <div class="store-card__name">${store.name}</div>
-        <div class="store-card__count">${store.count}</div>
+    if (!storeGridEl) return;
+    storeGridEl.innerHTML = stores.map(store => `
+      <div class="store-item ${activeStoreFilter === store.id ? 'selected' : ''}" data-store-id="${store.id}">
+        <div class="store-item__logo">
+          <div class="store-logo-graphic" style="background: ${store.bgColor};">
+            ${store.initial}
+          </div>
+        </div>
+        <div class="store-item__name">${store.name}</div>
       </div>
     `).join('');
 
-    // Attach click events
-    storesGrid.querySelectorAll('.store-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const storeName = card.getAttribute('data-store');
-        if (selectedStoreFilter.toLowerCase() === storeName.toLowerCase()) {
-          selectedStoreFilter = '';
-        } else {
-          selectedStoreFilter = storeName;
-        }
+    storeGridEl.querySelectorAll('.store-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const sid = item.getAttribute('data-store-id');
+        activeStoreFilter = (activeStoreFilter === sid) ? null : sid;
         renderStores();
         renderDeals();
-        scrollToDeals();
+        const dealsSec = document.getElementById('deals');
+        if (dealsSec) dealsSec.scrollIntoView({ behavior: 'smooth' });
       });
     });
   }
 
-  // Filter and Render Deals
+  // ==========================================
+  // 4. Render Deals
+  // ==========================================
   function renderDeals() {
-    if (!dealsGrid) return;
+    if (!dealGridEl) return;
 
-    const filtered = dealsData.filter(deal => {
-      // Category match
-      const matchCategory = currentCategory === 'all' || deal.category === currentCategory;
-      // Type match (code vs deal)
-      const matchType = currentType === 'all' || deal.type === currentType;
-      // Store filter match
-      const matchStore = !selectedStoreFilter || deal.store.toLowerCase() === selectedStoreFilter.toLowerCase();
-      // Search text match
-      const query = searchQuery.trim().toLowerCase();
-      const matchSearch = !query || 
-        deal.store.toLowerCase().includes(query) ||
-        deal.title.toLowerCase().includes(query) ||
-        deal.desc.toLowerCase().includes(query) ||
-        (deal.code && deal.code.toLowerCase().includes(query));
-
-      return matchCategory && matchType && matchStore && matchSearch;
+    const filtered = deals.filter(deal => {
+      // Store filter
+      if (activeStoreFilter && deal.storeId !== activeStoreFilter) return false;
+      // Type filter
+      if (activeTypeFilter === 'codes' && deal.type !== 'code') return false;
+      if (activeTypeFilter === 'sales' && deal.type !== 'deal') return false;
+      // Category filter
+      if (activeCategoryFilter && deal.category !== activeCategoryFilter) return false;
+      // Search
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        const matchTitle = deal.title.toLowerCase().includes(q);
+        const matchStore = deal.storeName.toLowerCase().includes(q);
+        const matchCode = deal.code ? deal.code.toLowerCase().includes(q) : false;
+        if (!matchTitle && !matchStore && !matchCode) return false;
+      }
+      return true;
     });
 
-    dealCountEl.textContent = filtered.length;
-
     if (filtered.length === 0) {
-      dealsGrid.innerHTML = '';
-      noResultsEl.style.display = 'block';
+      dealGridEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem; background: #fff; border-radius: 1rem; border: 1px solid #e2e2e2;">
+          <p style="color: #666; font-size: 1rem;">No deals found matching your selection.</p>
+          <button type="button" id="resetDealsBtn" style="margin-top: 0.75rem; color: #4c1fa2; font-weight: 600; text-decoration: underline; cursor: pointer;">Show All Deals</button>
+        </div>
+      `;
+      const resetBtn = document.getElementById('resetDealsBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          activeStoreFilter = null;
+          activeTypeFilter = 'all';
+          activeCategoryFilter = null;
+          searchQuery = '';
+          if (searchInput) searchInput.value = '';
+          filterPills.forEach(p => p.classList.toggle('active', p.getAttribute('data-filter') === 'all'));
+          renderStores();
+          renderDeals();
+        });
+      }
       return;
     }
 
-    noResultsEl.style.display = 'none';
-
-    dealsGrid.innerHTML = filtered.map(deal => {
+    dealGridEl.innerHTML = filtered.map(deal => {
       const isCode = deal.type === 'code';
+      const storeObj = stores.find(s => s.id === deal.storeId);
+
       return `
-        <article class="deal-card">
-          <div class="deal-card__top">
-            <div class="deal-card__store-info">
-              <div class="deal-card__logo">${deal.storeInitial}</div>
-              <div>
-                <div class="deal-card__store-name">${deal.store}</div>
-                <div class="deal-card__meta">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                  ${deal.expires}
-                </div>
-              </div>
-            </div>
-            <span class="deal-badge ${isCode ? 'code' : 'deal'}">${isCode ? 'Coupon Code' : 'Sale / Deal'}</span>
+        <div class="landing-deal-card">
+          <div class="landing-deal-card__logo">
+            <span class="deal-badge-graphic" style="color: ${storeObj ? storeObj.bgColor : '#4c1fa2'}">
+              ${deal.storeName}
+            </span>
           </div>
-
-          <div class="deal-card__discount">${deal.discount}</div>
-          <h3 class="deal-card__title">${deal.title}</h3>
-          <p class="deal-card__desc">${deal.desc}</p>
-
-          <div class="deal-card__footer">
-            <div class="deal-card__status">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              ${deal.verified}
+          <div class="landing-deal-card__content">
+            <span class="landing-deal-card__store-tag">${deal.storeName}</span>
+            <div class="landing-deal-card__title">${deal.title}</div>
+            <div class="landing-deal-card__cta">
+              ${isCode ? `
+                <a class="coupon-btn show-code" href="#" data-deal-id="${deal.id}">
+                  Show Code
+                  <span class="corner"><span>${deal.cornerText}</span></span>
+                </a>
+              ` : `
+                <a class="coupon-btn get-deal" href="#" data-deal-id="${deal.id}">
+                  Get Deal
+                </a>
+              `}
             </div>
-            ${isCode ? `
-              <button class="cta-btn-voucher" data-deal-id="${deal.id}" aria-label="Get Promo Code for ${deal.store}">
-                <span class="voucher-text">Get Code</span>
-                <span class="voucher-code-stub">•••</span>
-              </button>
-            ` : `
-              <button class="cta-btn-deal" data-deal-id="${deal.id}" aria-label="Get Deal for ${deal.store}">
-                Get Deal
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </button>
-            `}
           </div>
-        </article>
+        </div>
       `;
     }).join('');
 
-    // Attach click events on coupon/deal buttons
-    attachDealCardActions();
-  }
-
-  function attachDealCardActions() {
-    document.querySelectorAll('.cta-btn-voucher').forEach(btn => {
+    // Attach click events on deal buttons
+    dealGridEl.querySelectorAll('.coupon-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const dealId = parseInt(btn.getAttribute('data-deal-id'), 10);
-        const deal = dealsData.find(d => d.id === dealId);
-        if (deal) openCouponModalWithDeal(deal);
-      });
-    });
-
-    document.querySelectorAll('.cta-btn-deal').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const dealId = parseInt(btn.getAttribute('data-deal-id'), 10);
-        const deal = dealsData.find(d => d.id === dealId);
+        const deal = deals.find(d => d.id === dealId);
         if (deal) {
-          showToast(`Deal activated! Redirecting to ${deal.store}...`);
-          window.open(deal.storeUrl || '#', '_blank');
+          if (deal.type === 'code') {
+            openCouponModal(deal);
+          } else {
+            showToast(`Deal activated! Opening ${deal.storeName}...`);
+            window.open(deal.url, '_blank');
+          }
         }
       });
     });
   }
 
-  function scrollToDeals() {
-    const dealsSection = document.getElementById('deals');
-    if (dealsSection) {
-      dealsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
   // ==========================================
-  // 3. Coupon Modal & Clipboard Copy
+  // 5. Code Modal & 1-Click Clipboard Copy
   // ==========================================
-  let activeDeal = null;
+  let currentActiveDeal = null;
 
-  function openCouponModalWithDeal(deal) {
-    activeDeal = deal;
-    modalStoreAvatar.textContent = deal.storeInitial;
-    couponModalTitle.textContent = deal.title;
-    couponModalDesc.textContent = deal.desc;
-    revealedCodeText.textContent = deal.code;
-    modalStoreName.textContent = deal.store;
-    modalVisitStoreBtn.href = deal.storeUrl || '#';
+  function openCouponModal(deal) {
+    currentActiveDeal = deal;
+    modalStoreTitle.textContent = `${deal.storeName} Promo Code`;
+    modalDealTitle.textContent = deal.title;
+    modalCodeText.textContent = deal.code;
+    modalStoreNameText.textContent = deal.storeName;
+    modalStoreUrlBtn.href = deal.url;
 
-    // Reset copy button state
-    modalCopyBtn.classList.remove('copied');
-    copyBtnLabel.textContent = 'Copy Code';
+    // Reset copy button
+    copyCodeBtn.textContent = 'Copy Code';
+    copyCodeBtn.classList.remove('copied');
 
-    // Open Modal
-    openModal(couponModal);
+    // Show modal
+    couponModal.style.display = 'flex';
 
-    // Auto-copy to clipboard right away for convenient UX
-    copyCodeToClipboard(deal.code, false);
+    // Auto copy code
+    copyTextToClipboard(deal.code, false);
   }
 
-  function copyCodeToClipboard(code, userInitiated = true) {
-    if (!navigator.clipboard) {
-      // Fallback
-      const tempInput = document.createElement('input');
-      tempInput.value = code;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      onCopySuccess(code, userInitiated);
-      return;
-    }
-
-    navigator.clipboard.writeText(code).then(() => {
-      onCopySuccess(code, userInitiated);
-    }).catch(err => {
-      console.warn('Clipboard write failed:', err);
-    });
+  function closeCouponModal() {
+    couponModal.style.display = 'none';
   }
 
-  function onCopySuccess(code, showToastMsg = true) {
-    modalCopyBtn.classList.add('copied');
-    copyBtnLabel.textContent = 'COPIED!';
-    if (showToastMsg) {
-      showToast(`Promo Code "${code}" copied to clipboard! 🎉`);
+  function copyTextToClipboard(text, showToastAlert = true) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        handleCopySuccess(text, showToastAlert);
+      }).catch(() => fallbackCopy(text, showToastAlert));
+    } else {
+      fallbackCopy(text, showToastAlert);
     }
   }
 
-  modalCopyBtn.addEventListener('click', () => {
-    if (activeDeal && activeDeal.code) {
-      copyCodeToClipboard(activeDeal.code, true);
-    }
-  });
-
-  // ==========================================
-  // 4. Modal Helpers & Overlay Management
-  // ==========================================
-  function openModal(modalEl) {
-    if (!modalEl) return;
-    modalEl.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function fallbackCopy(text, showToastAlert) {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    handleCopySuccess(text, showToastAlert);
   }
 
-  function closeModal(modalEl) {
-    if (!modalEl) return;
-    modalEl.classList.remove('open');
-    // Only restore scroll if no other modals are open
-    const openModals = document.querySelectorAll('.modal-overlay.open');
-    if (openModals.length === 0) {
-      document.body.style.overflow = '';
+  function handleCopySuccess(text, showToastAlert) {
+    copyCodeBtn.textContent = 'Copied!';
+    copyCodeBtn.classList.add('copied');
+    if (showToastAlert) {
+      showToast(`Promo Code "${text}" copied to clipboard!`);
     }
   }
 
-  // Close when clicking modal close button or clicking outside modal content
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeModal(overlay);
+  if (copyCodeBtn) {
+    copyCodeBtn.addEventListener('click', () => {
+      if (currentActiveDeal && currentActiveDeal.code) {
+        copyTextToClipboard(currentActiveDeal.code, true);
       }
     });
-  });
-
-  // Keyboard Escape to close modals
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(modal => closeModal(modal));
-    }
-  });
-
-  // Modal Close buttons
-  if (closeCouponModal) closeCouponModal.addEventListener('click', () => closeModal(couponModal));
-
-  // Privacy Policy Modal Triggers
-  [openPrivacyBtn, inlinePrivacyBtn, bannerPrivacyBtn].forEach(btn => {
-    if (btn) btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(privacyModal);
-    });
-  });
-  if (closePrivacyModal) closePrivacyModal.addEventListener('click', () => closeModal(privacyModal));
-  if (closePrivacyFooterBtn) closePrivacyFooterBtn.addEventListener('click', () => closeModal(privacyModal));
-
-  // Cookies Policy Modal Triggers
-  [openCookiesBtn, inlineCookiesBtn, bannerCookiesBtn].forEach(btn => {
-    if (btn) btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(cookiesModal);
-    });
-  });
-  if (closeCookiesModal) closeCookiesModal.addEventListener('click', () => closeModal(cookiesModal));
-  if (closeCookiesFooterBtn) closeCookiesFooterBtn.addEventListener('click', () => closeModal(cookiesModal));
-
-  // Cookie Settings / Preferences Modal Triggers
-  [openCookieSettingsBtn, bannerPreferencesBtn, openSettingsFromCookiesBtn].forEach(btn => {
-    if (btn) btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeModal(cookiesModal); // If opened from inside cookies policy
-      openModal(cookieSettingsModal);
-    });
-  });
-  if (closeCookieSettingsModal) closeCookieSettingsModal.addEventListener('click', () => closeModal(cookieSettingsModal));
-
-  if (saveCookiePreferencesBtn) {
-    saveCookiePreferencesBtn.addEventListener('click', () => {
-      localStorage.setItem('herpromocodes_cookie_consent', 'customized');
-      hideCookieBanner();
-      closeModal(cookieSettingsModal);
-      showToast('Cookie preferences successfully saved! ✓');
-    });
   }
 
-  if (acceptAllCookiesModalBtn) {
-    acceptAllCookiesModalBtn.addEventListener('click', () => {
-      localStorage.setItem('herpromocodes_cookie_consent', 'accepted');
-      hideCookieBanner();
-      closeModal(cookieSettingsModal);
-      showToast('All cookies accepted.');
-    });
+  if (closeCouponModalBtn) {
+    closeCouponModalBtn.addEventListener('click', closeCouponModal);
   }
 
-  // Terms of Service inline button
-  const inlineTermsBtn = document.getElementById('inlineTermsBtn');
-  if (inlineTermsBtn) {
-    inlineTermsBtn.addEventListener('click', () => {
-      openModal(privacyModal);
+  // ==========================================
+  // 6. Search & Filters
+  // ==========================================
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderDeals();
     });
-  }
 
-  // Submit Coupon Modal Triggers
-  if (openSubmitModal) openSubmitModal.addEventListener('click', () => openModal(submitModal));
-  if (closeSubmitModal) closeSubmitModal.addEventListener('click', () => closeModal(submitModal));
-
-  if (submitCouponForm) {
-    submitCouponForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const store = document.getElementById('submitStore').value.trim();
-      const code = document.getElementById('submitCode').value.trim().toUpperCase();
-      const discount = document.getElementById('submitDiscount').value.trim().toUpperCase();
-      const desc = document.getElementById('submitDesc').value.trim() || `${discount} sitewide discount offer.`;
-      const category = document.getElementById('submitCategory').value;
-
-      if (store && code) {
-        // Add new deal dynamically to the top of list
-        const newDeal = {
-          id: Date.now(),
-          store: store,
-          storeInitial: store.substring(0, 2).toUpperCase(),
-          type: 'code',
-          code: code,
-          discount: discount,
-          title: `${discount} - Special Promo Code`,
-          desc: desc,
-          category: category,
-          verified: 'User Submitted',
-          used: 1,
-          expires: 'Newly added',
-          storeUrl: '#'
-        };
-
-        dealsData.unshift(newDeal);
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        searchQuery = searchInput.value.trim();
         renderDeals();
-        submitCouponForm.reset();
-        closeModal(submitModal);
-        showToast(`Thank you! Promo code for ${store} submitted.`);
-        scrollToDeals();
+        const dealsSec = document.getElementById('deals');
+        if (dealsSec) dealsSec.scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
 
-  // ==========================================
-  // 5. Search & Filters
-  // ==========================================
-
-  // Live Search Input
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value;
-    clearSearchBtn.style.display = searchQuery ? 'block' : 'none';
-    renderDeals();
-  });
-
-  clearSearchBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    searchQuery = '';
-    clearSearchBtn.style.display = 'none';
-    renderDeals();
-    searchInput.focus();
-  });
-
-  searchSubmitBtn.addEventListener('click', () => {
-    searchQuery = searchInput.value;
-    renderDeals();
-    scrollToDeals();
-  });
-
-  searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      searchQuery = searchInput.value;
+  if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      searchQuery = searchInput ? searchInput.value.trim() : '';
       renderDeals();
-      scrollToDeals();
-    }
-  });
-
-  // Trending Chips in Hero
-  document.querySelectorAll('.tag-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const store = chip.getAttribute('data-store');
-      searchInput.value = store;
-      searchQuery = store;
-      clearSearchBtn.style.display = 'block';
-      selectedStoreFilter = store;
-      renderStores();
-      renderDeals();
-      scrollToDeals();
+      const dealsSec = document.getElementById('deals');
+      if (dealsSec) dealsSec.scrollIntoView({ behavior: 'smooth' });
     });
-  });
+  }
 
-  // Category Pills Filter
-  const categoryPills = document.querySelectorAll('.cat-pill');
-  categoryPills.forEach(pill => {
+  filterPills.forEach(pill => {
     pill.addEventListener('click', () => {
-      categoryPills.forEach(p => p.classList.remove('active'));
+      filterPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      currentCategory = pill.getAttribute('data-category');
+      activeTypeFilter = pill.getAttribute('data-filter');
       renderDeals();
     });
   });
 
-  // Deal Type Tabs (All / Codes / Sales)
-  const typeTabs = document.querySelectorAll('.type-tab');
-  typeTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      typeTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentType = tab.getAttribute('data-type');
-      renderDeals();
-    });
-  });
+  // Accordion Toggle
+  const accordionTrigger = document.getElementById('accordionTrigger');
+  const categoryAccordion = document.getElementById('categoryAccordion');
 
-  // Reset Filters Buttons
-  if (resetStoreFilter) {
-    resetStoreFilter.addEventListener('click', () => {
-      selectedStoreFilter = '';
-      renderStores();
-      renderDeals();
+  if (accordionTrigger && categoryAccordion) {
+    accordionTrigger.addEventListener('click', () => {
+      categoryAccordion.classList.toggle('is-open');
     });
   }
 
-  if (resetAllFiltersBtn) {
-    resetAllFiltersBtn.addEventListener('click', () => {
-      selectedStoreFilter = '';
-      searchQuery = '';
-      currentCategory = 'all';
-      currentType = 'all';
-      searchInput.value = '';
-      clearSearchBtn.style.display = 'none';
-
-      // Reset pill UI
-      categoryPills.forEach(p => p.classList.remove('active'));
-      const allPill = document.querySelector('.cat-pill[data-category="all"]');
-      if (allPill) allPill.classList.add('active');
-
-      // Reset tab UI
-      typeTabs.forEach(t => t.classList.remove('active'));
-      const allType = document.querySelector('.type-tab[data-type="all"]');
-      if (allType) allType.classList.add('active');
-
-      renderStores();
-      renderDeals();
-    });
-  }
-
-  // Footer Category / Store filter links
-  document.querySelectorAll('.footer-filter-link').forEach(link => {
+  // Category links inside accordion
+  document.querySelectorAll('.accordion__link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const cat = link.getAttribute('data-category');
-      currentCategory = cat;
-      categoryPills.forEach(p => {
-        p.classList.toggle('active', p.getAttribute('data-category') === cat);
+      activeCategoryFilter = (activeCategoryFilter === cat) ? null : cat;
+      renderDeals();
+      const dealsSec = document.getElementById('deals');
+      if (dealsSec) dealsSec.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // ==========================================
+  // 7. Modals: Privacy, Cookies & Settings
+  // ==========================================
+  function showModal(modal) {
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function hideModal(modal) {
+    if (modal) modal.style.display = 'none';
+  }
+
+  // Privacy Policy
+  [openPrivacyBtn, fineprintPrivacyBtn, newsletterPrivacyLink].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal(privacyModal);
       });
-      renderDeals();
-      scrollToDeals();
-    });
-  });
-
-  document.querySelectorAll('.footer-store-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const store = link.getAttribute('data-store');
-      selectedStoreFilter = store;
-      renderStores();
-      renderDeals();
-      scrollToDeals();
-    });
-  });
-
-  // ==========================================
-  // 6. Cookie Consent Banner Handling
-  // ==========================================
-  function checkCookieConsent() {
-    const consent = localStorage.getItem('herpromocodes_cookie_consent');
-    if (!consent) {
-      setTimeout(() => {
-        if (cookieBanner) cookieBanner.classList.add('show');
-      }, 800);
     }
-  }
+  });
+  if (closePrivacyModal) closePrivacyModal.addEventListener('click', () => hideModal(privacyModal));
+  if (closePrivacyFooterBtn) closePrivacyFooterBtn.addEventListener('click', () => hideModal(privacyModal));
 
-  function hideCookieBanner() {
-    if (cookieBanner) cookieBanner.classList.remove('show');
-  }
+  // Cookies Policy
+  [openCookiesBtn, fineprintCookiesBtn].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal(cookiesModal);
+      });
+    }
+  });
+  if (closeCookiesModal) closeCookiesModal.addEventListener('click', () => hideModal(cookiesModal));
+  if (closeCookiesFooterBtn) closeCookiesFooterBtn.addEventListener('click', () => hideModal(cookiesModal));
 
-  if (bannerAcceptBtn) {
-    bannerAcceptBtn.addEventListener('click', () => {
-      localStorage.setItem('herpromocodes_cookie_consent', 'accepted');
-      hideCookieBanner();
-      showToast('Cookies accepted. Enjoy uninterrupted savings!');
+  // Cookie Settings
+  if (openCookieSettingsBtn) {
+    openCookieSettingsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showModal(cookieSettingsModal);
+    });
+  }
+  if (closeCookieSettingsModal) closeCookieSettingsModal.addEventListener('click', () => hideModal(cookieSettingsModal));
+  if (saveCookieSettingsBtn) {
+    saveCookieSettingsBtn.addEventListener('click', () => {
+      hideModal(cookieSettingsModal);
+      showToast('Cookie preferences saved successfully!');
     });
   }
 
-  if (bannerDeclineBtn) {
-    bannerDeclineBtn.addEventListener('click', () => {
-      localStorage.setItem('herpromocodes_cookie_consent', 'declined');
-      hideCookieBanner();
-      showToast('Non-essential cookies declined.');
+  // Close modals on backdrop click
+  document.querySelectorAll('.custom-modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        hideModal(overlay);
+      }
     });
-  }
+  });
+
+  // Close modals with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-modal-overlay').forEach(modal => {
+        hideModal(modal);
+      });
+    }
+  });
 
   // ==========================================
-  // 7. Newsletter & Mobile Navigation
+  // 8. Newsletter & Mobile Menu
   // ==========================================
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
@@ -734,41 +580,42 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const emailInput = document.getElementById('newsletterEmail');
       if (emailInput && emailInput.value) {
-        showToast('Subscribed! Check your inbox for secret promo codes.');
+        showToast('Subscribed! Thank you for joining PromoBella.');
         newsletterForm.reset();
       }
     });
   }
 
-  // Mobile Menu Toggle
-  if (menuToggle && navMenu) {
+  if (menuToggle && mobileNav) {
     menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      menuToggle.classList.toggle('active');
-    });
-
-    // Close menu when clicking nav links
-    navMenu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        menuToggle.classList.remove('active');
-      });
+      mobileNav.classList.add('open');
     });
   }
 
+  if (mobileCloseBtn && mobileNav) {
+    mobileCloseBtn.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+    });
+  }
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileNav) mobileNav.classList.remove('open');
+    });
+  });
+
   // ==========================================
-  // 8. Toast Helper
+  // 9. Toast Helper
   // ==========================================
   let toastTimer = null;
   function showToast(msg) {
-    if (!toast || !toastMessage) return;
-    toastMessage.textContent = msg;
-    toast.classList.add('show');
-
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3200);
+      toastEl.classList.remove('show');
+    }, 3000);
   }
 
   // ==========================================
@@ -776,6 +623,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   renderStores();
   renderDeals();
-  checkCookieConsent();
 
 });
