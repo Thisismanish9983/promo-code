@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 55" width="100%" height="100%">
+  <text x="8" y="32" font-family="'Amazon Ember', 'Arial', -apple-system, BlinkMacSystemFont, sans-serif" font-size="34" font-weight="800" fill="#111111" letter-spacing="-1">amazon</text>
+  <!-- Amazon Smile Curve -->
+  <path d="M 16 38 C 45 52, 90 52, 126 39" fill="none" stroke="#FF9900" stroke-width="4.2" stroke-linecap="round"/>
+  <!-- Smile Arrowhead -->
+  <path d="M 120 33 L 132 38 L 123 48 C 124 45, 124 40, 120 33 Z" fill="#FF9900"/>
+</svg>

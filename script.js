@@ -1,11 +1,11 @@
 /**
  * PromoBella - Main Interactive Script
- * Features:
- * - 10 Verified Stores with custom brand graphics
+ * Handles:
+ * - 10 Verified Stores with custom brand graphics & filter
  * - 10 Top Deals with "Show Code" folded corner buttons
  * - Instant Live Search & Filter Pills
- * - Modal Dialogues (Code reveal, Privacy, Cookies)
- * - Accordion Toggle & 1-Click Clipboard Copy
+ * - Coupon Code Reveal Modal with 1-Click Clipboard Copy
+ * - Accordion Toggle & Mobile Navigation Drawer
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,71 +17,61 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'amazon',
       name: 'Amazon',
-      initial: 'AMZ',
-      bgColor: '#ff9900',
+      logo: 'assets/logos/amazon.svg',
       category: 'electronics'
     },
     {
       id: 'nike',
       name: 'Nike',
-      initial: 'NIKE',
-      bgColor: '#111111',
+      logo: 'assets/logos/nike.svg',
       category: 'fashion'
     },
     {
       id: 'sephora',
       name: 'Sephora',
-      initial: 'SEPH',
-      bgColor: '#000000',
+      logo: 'assets/logos/sephora.svg',
       category: 'beauty'
     },
     {
       id: 'zara',
       name: 'Zara',
-      initial: 'ZARA',
-      bgColor: '#222222',
+      logo: 'assets/logos/zara.svg',
       category: 'fashion'
     },
     {
       id: 'asos',
       name: 'ASOS',
-      initial: 'ASOS',
-      bgColor: '#f43f5e',
+      logo: 'assets/logos/asos.svg',
       category: 'fashion'
     },
     {
       id: 'ulta',
       name: 'Ulta Beauty',
-      initial: 'ULTA',
-      bgColor: '#e11d48',
+      logo: 'assets/logos/ulta.svg',
       category: 'beauty'
     },
     {
       id: 'glossier',
       name: 'Glossier',
-      initial: 'GLOS',
-      bgColor: '#ec4899',
+      logo: 'assets/logos/glossier.svg',
       category: 'beauty'
     },
     {
       id: 'shein',
       name: 'Shein',
-      initial: 'SHEIN',
-      bgColor: '#7c3aed',
+      logo: 'assets/logos/shein.svg',
       category: 'fashion'
     },
     {
       id: 'apple',
       name: 'Apple',
-      initial: 'APPLE',
-      bgColor: '#475569',
+      logo: 'assets/logos/apple.svg',
       category: 'electronics'
     },
     {
       id: 'nordstrom',
       name: 'Nordstrom',
-      initial: 'NORD',
-      bgColor: '#2563eb',
+      logo: 'assets/logos/nordstrom.svg',
       category: 'fashion'
     }
   ];
@@ -216,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterPills = document.querySelectorAll('.deals-filter-pills .pill');
   const toastEl = document.getElementById('toastMessage');
 
-  // Modal Elements
+  // Coupon Modal Elements
   const couponModal = document.getElementById('couponSuccessModal');
   const closeCouponModalBtn = document.getElementById('closeCouponModal');
   const modalStoreTitle = document.getElementById('modalStoreTitle');
@@ -226,41 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalStoreNameText = document.getElementById('modalStoreNameText');
   const modalStoreUrlBtn = document.getElementById('modalStoreUrlBtn');
 
-  // Footer Policy Buttons & Modals
-  const privacyModal = document.getElementById('privacyModal');
-  const cookiesModal = document.getElementById('cookiesModal');
-  const cookieSettingsModal = document.getElementById('cookieSettingsModal');
-
-  const openPrivacyBtn = document.getElementById('openPrivacyBtn');
-  const openCookiesBtn = document.getElementById('openCookiesBtn');
-  const openCookieSettingsBtn = document.getElementById('openCookieSettingsBtn');
-  const fineprintPrivacyBtn = document.getElementById('fineprintPrivacyBtn');
-  const fineprintCookiesBtn = document.getElementById('fineprintCookiesBtn');
-  const newsletterPrivacyLink = document.getElementById('newsletterPrivacyLink');
-
-  const closePrivacyModal = document.getElementById('closePrivacyModal');
-  const closePrivacyFooterBtn = document.getElementById('closePrivacyFooterBtn');
-  const closeCookiesModal = document.getElementById('closeCookiesModal');
-  const closeCookiesFooterBtn = document.getElementById('closeCookiesFooterBtn');
-  const closeCookieSettingsModal = document.getElementById('closeCookieSettingsModal');
-  const saveCookieSettingsBtn = document.getElementById('saveCookieSettingsBtn');
-
   // Mobile Drawer
   const menuToggle = document.getElementById('menuToggle');
   const mobileNav = document.getElementById('mobileNav');
   const mobileCloseBtn = document.getElementById('mobileCloseBtn');
 
   // ==========================================
-  // 3. Render Stores
+  // 3. Render Stores (10 Stores)
   // ==========================================
   function renderStores() {
     if (!storeGridEl) return;
     storeGridEl.innerHTML = stores.map(store => `
-      <div class="store-item ${activeStoreFilter === store.id ? 'selected' : ''}" data-store-id="${store.id}">
+      <div class="store-item ${activeStoreFilter === store.id ? 'selected' : ''}" data-store-id="${store.id}" title="${store.name} Promo Codes">
         <div class="store-item__logo">
-          <div class="store-logo-graphic" style="background: ${store.bgColor};">
-            ${store.initial}
-          </div>
+          <img src="${store.logo}" alt="${store.name} Logo" class="brand-logo-img" loading="lazy" />
         </div>
         <div class="store-item__name">${store.name}</div>
       </div>
@@ -329,13 +298,12 @@ document.addEventListener('DOMContentLoaded', () => {
     dealGridEl.innerHTML = filtered.map(deal => {
       const isCode = deal.type === 'code';
       const storeObj = stores.find(s => s.id === deal.storeId);
+      const storeLogoUrl = storeObj ? storeObj.logo : '';
 
       return `
         <div class="landing-deal-card">
           <div class="landing-deal-card__logo">
-            <span class="deal-badge-graphic" style="color: ${storeObj ? storeObj.bgColor : '#4c1fa2'}">
-              ${deal.storeName}
-            </span>
+            <img src="${storeLogoUrl}" alt="${deal.storeName} Logo" class="deal-card-logo-img" loading="lazy" />
           </div>
           <div class="landing-deal-card__content">
             <span class="landing-deal-card__store-tag">${deal.storeName}</span>
@@ -376,12 +344,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. Code Modal & 1-Click Clipboard Copy
+  // 5. Coupon Modal & 1-Click Clipboard Copy
   // ==========================================
   let currentActiveDeal = null;
 
   function openCouponModal(deal) {
+    if (!couponModal) return;
     currentActiveDeal = deal;
+    const storeObj = stores.find(s => s.id === deal.storeId);
+
+    const modalStoreLogoImg = document.getElementById('modalStoreLogoImg');
+    if (modalStoreLogoImg && storeObj) {
+      modalStoreLogoImg.src = storeObj.logo;
+      modalStoreLogoImg.alt = `${deal.storeName} Logo`;
+    }
+
     modalStoreTitle.textContent = `${deal.storeName} Promo Code`;
     modalDealTitle.textContent = deal.title;
     modalCodeText.textContent = deal.code;
@@ -400,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeCouponModal() {
-    couponModal.style.display = 'none';
+    if (couponModal) couponModal.style.display = 'none';
   }
 
   function copyTextToClipboard(text, showToastAlert = true) {
@@ -424,8 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleCopySuccess(text, showToastAlert) {
-    copyCodeBtn.textContent = 'Copied!';
-    copyCodeBtn.classList.add('copied');
+    if (copyCodeBtn) {
+      copyCodeBtn.textContent = 'Copied!';
+      copyCodeBtn.classList.add('copied');
+    }
     if (showToastAlert) {
       showToast(`Promo Code "${text}" copied to clipboard!`);
     }
@@ -441,6 +420,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (closeCouponModalBtn) {
     closeCouponModalBtn.addEventListener('click', closeCouponModal);
+  }
+
+  if (couponModal) {
+    couponModal.addEventListener('click', (e) => {
+      if (e.target === couponModal) {
+        closeCouponModal();
+      }
+    });
   }
 
   // ==========================================
@@ -503,76 +490,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ==========================================
-  // 7. Modals: Privacy, Cookies & Settings
-  // ==========================================
-  function showModal(modal) {
-    if (modal) modal.style.display = 'flex';
-  }
-
-  function hideModal(modal) {
-    if (modal) modal.style.display = 'none';
-  }
-
-  // Privacy Policy
-  [openPrivacyBtn, fineprintPrivacyBtn, newsletterPrivacyLink].forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showModal(privacyModal);
-      });
-    }
-  });
-  if (closePrivacyModal) closePrivacyModal.addEventListener('click', () => hideModal(privacyModal));
-  if (closePrivacyFooterBtn) closePrivacyFooterBtn.addEventListener('click', () => hideModal(privacyModal));
-
-  // Cookies Policy
-  [openCookiesBtn, fineprintCookiesBtn].forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showModal(cookiesModal);
-      });
-    }
-  });
-  if (closeCookiesModal) closeCookiesModal.addEventListener('click', () => hideModal(cookiesModal));
-  if (closeCookiesFooterBtn) closeCookiesFooterBtn.addEventListener('click', () => hideModal(cookiesModal));
-
-  // Cookie Settings
-  if (openCookieSettingsBtn) {
-    openCookieSettingsBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showModal(cookieSettingsModal);
-    });
-  }
-  if (closeCookieSettingsModal) closeCookieSettingsModal.addEventListener('click', () => hideModal(cookieSettingsModal));
-  if (saveCookieSettingsBtn) {
-    saveCookieSettingsBtn.addEventListener('click', () => {
-      hideModal(cookieSettingsModal);
-      showToast('Cookie preferences saved successfully!');
-    });
-  }
-
-  // Close modals on backdrop click
-  document.querySelectorAll('.custom-modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        hideModal(overlay);
-      }
-    });
-  });
-
   // Close modals with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      document.querySelectorAll('.custom-modal-overlay').forEach(modal => {
-        hideModal(modal);
-      });
+      closeCouponModal();
+      if (mobileNav) mobileNav.classList.remove('open');
     }
   });
 
   // ==========================================
-  // 8. Newsletter & Mobile Menu
+  // 7. Newsletter & Mobile Menu
   // ==========================================
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
@@ -587,7 +514,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (menuToggle && mobileNav) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       mobileNav.classList.add('open');
     });
   }
@@ -598,6 +526,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Close mobile nav when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileNav && mobileNav.classList.contains('open')) {
+      if (!mobileNav.contains(e.target) && e.target !== menuToggle) {
+        mobileNav.classList.remove('open');
+      }
+    }
+  });
+
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       if (mobileNav) mobileNav.classList.remove('open');
@@ -605,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 9. Toast Helper
+  // 8. Toast Helper
   // ==========================================
   let toastTimer = null;
   function showToast(msg) {
