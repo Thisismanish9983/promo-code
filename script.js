@@ -854,9 +854,93 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
+  // 12. Cookie Consent Popup (First-Time Load)
+  // ==========================================
+  function initCookieConsent() {
+    const COOKIE_CONSENT_KEY = 'promobella_cookie_consent';
+    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+    // If already consented, don't show automatically
+    if (consent) return;
+
+    // Check if banner already in DOM, else create and append it
+    let banner = document.getElementById('cookieConsentBanner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'cookieConsentBanner';
+      banner.className = 'cookie-consent-banner';
+      banner.setAttribute('role', 'dialog');
+      banner.setAttribute('aria-label', 'Cookie Consent');
+      banner.innerHTML = `
+        <div class="cookie-consent-inner">
+          <button type="button" id="closeCookieConsent" class="cookie-consent-close" aria-label="Close cookie notice">&times;</button>
+          <div class="cookie-consent-header">
+            <div class="cookie-consent-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4c1fa2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+                <circle cx="8.5" cy="8.5" r="1.5" fill="#4c1fa2"></circle>
+                <circle cx="7" cy="13.5" r="1.5" fill="#4c1fa2"></circle>
+                <circle cx="11.5" cy="16.5" r="1.5" fill="#4c1fa2"></circle>
+                <circle cx="15.5" cy="12.5" r="1.5" fill="#4c1fa2"></circle>
+              </svg>
+            </div>
+            <h4 class="cookie-consent-title">We Value Your Privacy &amp; Cookies</h4>
+          </div>
+          <p class="cookie-consent-text">
+            PromoBella uses cookies to verify coupon activations, remember store preferences, and ensure you get valid discounts. By clicking "Accept All", you agree to our use of cookies. Read our <a href="cookies-policy.html">Cookies Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+          </p>
+          <div class="cookie-consent-actions">
+            <button type="button" id="acceptCookiesBtn" class="cookie-btn cookie-btn--accept">Accept All</button>
+            <button type="button" id="declineCookiesBtn" class="cookie-btn cookie-btn--decline">Essential Only</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(banner);
+    }
+
+    // Show with slight delay so user sees smooth slide-in
+    setTimeout(() => {
+      banner.style.display = 'block';
+    }, 700);
+
+    // Event listeners
+    function hideConsent(status) {
+      localStorage.setItem(COOKIE_CONSENT_KEY, status);
+      banner.style.animation = 'none';
+      banner.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 250);
+      showToast(status === 'accepted' ? 'Cookie preferences saved: All Accepted' : 'Cookie preferences saved: Essential Only');
+    }
+
+    const acceptBtn = document.getElementById('acceptCookiesBtn');
+    const declineBtn = document.getElementById('declineCookiesBtn');
+    const closeBtn = document.getElementById('closeCookieConsent');
+
+    if (acceptBtn) acceptBtn.addEventListener('click', () => hideConsent('accepted'));
+    if (declineBtn) declineBtn.addEventListener('click', () => hideConsent('essential'));
+    if (closeBtn) closeBtn.addEventListener('click', () => hideConsent('closed'));
+  }
+
+  // Hook any "Cookie Preferences" links in the footer across pages
+  document.querySelectorAll('a[href*="cookies-policy.html"]').forEach(link => {
+    if (link.textContent.toLowerCase().includes('preferences')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('promobella_cookie_consent');
+        initCookieConsent();
+      });
+    }
+  });
+
+  // ==========================================
   // Initial Run
   // ==========================================
   renderStores();
   renderDeals();
+  initCookieConsent();
 
 });
