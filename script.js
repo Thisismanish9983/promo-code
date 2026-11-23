@@ -675,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "10 Proven Ways to Stack Coupons & Double Your Savings Online",
       category: "Smart Shopping",
       date: "November 2026 • 5 min read",
+      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>Online shoppers often leave significant money on the table by simply applying a single promo code at checkout. In the modern retail landscape, the biggest discounts come from <strong>coupon stacking</strong>—combining multiple promotions on a single order.</p>
@@ -697,6 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "The Sephora & Ulta Beauty Playbook: When to Buy for Max Discounts",
       category: "Beauty & Skincare",
       date: "November 2026 • 6 min read",
+      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>Beauty and luxury cosmetics are notorious for strict manufacturer price controls. However, knowledgeable shoppers know that following the bi-annual sales calendar unlocks luxury beauty for up to 50% off.</p>
@@ -716,6 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "How to Spot Real vs. Expired Promo Codes in 2026",
       category: "Coupon Tips",
       date: "November 2026 • 4 min read",
+      image: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>We've all been there: you find an alluring coupon code promising "70% Off Sitewide", paste it into checkout, only to see the dreaded red message: <em>"Code invalid or expired"</em>. Here's why that happens and how to spot genuine codes instantly.</p>
@@ -739,6 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Fashion on a Budget: How to Score Zara, ASOS & Shein Sales Year-Round",
       category: "Fashion & Style",
       date: "November 2026 • 5 min read",
+      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>Staying trendy doesn't require draining your savings account. By learning the release patterns and markdown schedules of fast-fashion giants, you can consistently purchase wardrobe staples at 40% to 70% below retail.</p>
@@ -758,6 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Smart Tech Savings: Student, Trade-In & Refurbished Deals at Apple & Amazon",
       category: "Tech & Electronics",
       date: "November 2026 • 6 min read",
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>Technology hardware has narrow profit margins, meaning coupon codes rarely knock off massive percentages. However, savvy consumers can leverage manufacturer trade-ins and certified refurbished inventory to save hundreds of dollars.</p>
@@ -777,6 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "The Retail Sales Calendar: Key Shopping Dates You Shouldn't Miss",
       category: "Seasonal Sales",
       date: "November 2026 • 7 min read",
+      image: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>Timing is everything in retail. Every category of consumer product has specific months when inventory turnover forces stores to offer their highest discounts. Bookmark this seasonal savings calendar.</p>
@@ -823,6 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (readerModalTitle) readerModalTitle.textContent = article.title;
       if (readerModalBody) {
         readerModalBody.innerHTML = `
+          <img src="${article.image}" alt="${article.title}" class="article-reader-img" />
           <div style="margin-bottom: 1.25rem;">
             <span style="font-size: 0.8rem; font-weight: 700; color: #4c1fa2; text-transform: uppercase; background: #f3ebfc; padding: 0.25rem 0.65rem; border-radius: 999px;">${article.category}</span>
             <span style="font-size: 0.85rem; color: #777; margin-left: 0.5rem;">${article.date}</span>
