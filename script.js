@@ -718,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "How to Spot Real vs. Expired Promo Codes in 2026",
       category: "Coupon Tips",
       date: "November 2026 • 4 min read",
-      image: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1607083206325-caf1edba7a0f?auto=format&fit=crop&w=800&q=80",
       content: `
         <div class="article-full-content">
           <p>We've all been there: you find an alluring coupon code promising "70% Off Sitewide", paste it into checkout, only to see the dreaded red message: <em>"Code invalid or expired"</em>. Here's why that happens and how to spot genuine codes instantly.</p>
