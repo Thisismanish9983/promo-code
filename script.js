@@ -556,6 +556,297 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
+  // 9. Customer Support Form Handler (support.html)
+  // ==========================================
+  const supportForm = document.getElementById('customerSupportForm');
+  const contactSuccessAlert = document.getElementById('contactSuccessAlert');
+  const successAlertTitle = document.getElementById('successAlertTitle');
+  const successAlertMsg = document.getElementById('successAlertMsg');
+
+  if (supportForm) {
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const subjectSelect = document.getElementById('contactSubject');
+    const messageInput = document.getElementById('contactMessage');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+
+    // Input listener to clear errors
+    [nameInput, emailInput, messageInput].forEach(input => {
+      if (!input) return;
+      input.addEventListener('input', () => {
+        input.classList.remove('invalid');
+        const err = input.parentElement.parentElement.querySelector('.form-error');
+        if (err) err.classList.remove('show');
+      });
+    });
+
+    supportForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      // Validate Name
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      if (!nameVal) {
+        if (nameInput) nameInput.classList.add('invalid');
+        if (nameError) nameError.classList.add('show');
+        isValid = false;
+      }
+
+      // Validate Email
+      const emailVal = emailInput ? emailInput.value.trim() : '';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailVal || !emailRegex.test(emailVal)) {
+        if (emailInput) emailInput.classList.add('invalid');
+        if (emailError) emailError.classList.add('show');
+        isValid = false;
+      }
+
+      // Validate Message (min 10 chars)
+      const msgVal = messageInput ? messageInput.value.trim() : '';
+      if (!msgVal || msgVal.length < 10) {
+        if (messageInput) messageInput.classList.add('invalid');
+        if (messageError) messageError.classList.add('show');
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      // Success
+      if (contactSuccessAlert) {
+        if (successAlertTitle) successAlertTitle.textContent = `Thank You, ${nameVal}!`;
+        if (successAlertMsg) {
+          successAlertMsg.textContent = `Your message regarding "${subjectSelect ? subjectSelect.options[subjectSelect.selectedIndex].text : 'Support'}" has been sent. Our team will review your inquiry and reply to ${emailVal} within 24 hours.`;
+        }
+        contactSuccessAlert.style.display = 'flex';
+        contactSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      showToast('Support message sent successfully!');
+      supportForm.reset();
+    });
+  }
+
+  // ==========================================
+  // 10. Support FAQ Accordion (support.html)
+  // ==========================================
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.faq-item');
+      if (!parent) return;
+      const isOpen = parent.classList.contains('active');
+      // Close other faq items
+      document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+      if (!isOpen) {
+        parent.classList.add('active');
+      }
+    });
+  });
+
+  // ==========================================
+  // 11. Blog Filtering & Interactive Reader (blog.html)
+  // ==========================================
+  const blogPills = document.querySelectorAll('#blogPills .pill');
+  const blogCards = document.querySelectorAll('.blog-card');
+
+  if (blogPills.length > 0) {
+    blogPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        blogPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const cat = pill.getAttribute('data-category');
+        blogCards.forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // Full Blog Articles Content
+  const blogArticlesData = {
+    1: {
+      title: "10 Proven Ways to Stack Coupons & Double Your Savings Online",
+      category: "Smart Shopping",
+      date: "November 2026 • 5 min read",
+      content: `
+        <div class="article-full-content">
+          <p>Online shoppers often leave significant money on the table by simply applying a single promo code at checkout. In the modern retail landscape, the biggest discounts come from <strong>coupon stacking</strong>—combining multiple promotions on a single order.</p>
+          
+          <h3>1. Sign Up for First-Time Order Discounts</h3>
+          <p>Most major retailers (including Sephora, ASOS, and Nike) offer an immediate 10% to 15% discount code when you subscribe to their newsletter. This voucher can almost always be used on top of markdown clearance prices.</p>
+
+          <h3>2. Meet Free Shipping Minimums Strategically</h3>
+          <p>Paying $7 to $12 for standard delivery can completely erase your coupon savings. If you are $5 short of the free delivery threshold, adding a $6 everyday essential (like socks, travel toiletries, or lip balm) is cheaper than paying delivery fees bare.</p>
+
+          <h3>3. Time Purchases Around Retailer Flash Days</h3>
+          <p>Save non-urgent purchases in your wishlist until stores run sitewide multiplier events (such as Ulta's 5x Rewards or Amazon Prime Days), where coupon codes apply on top of promotional store credit.</p>
+
+          <h3>4. Stack Student or Military Verifications</h3>
+          <p>Platforms like ASOS, Apple, and Nike offer permanent 10% to 15% discounts for verified students via UNiDAYS or Student Beans. Check whether your retailer permits educational vouchers alongside free shipping promo codes.</p>
+        </div>
+      `
+    },
+    2: {
+      title: "The Sephora & Ulta Beauty Playbook: When to Buy for Max Discounts",
+      category: "Beauty & Skincare",
+      date: "November 2026 • 6 min read",
+      content: `
+        <div class="article-full-content">
+          <p>Beauty and luxury cosmetics are notorious for strict manufacturer price controls. However, knowledgeable shoppers know that following the bi-annual sales calendar unlocks luxury beauty for up to 50% off.</p>
+
+          <h3>1. Ulta's "21 Days of Beauty" (March & September)</h3>
+          <p>Twice a year, Ulta Beauty slashes prices by 50% on select premium skincare, prestige haircare, and cult-favorite makeup brands every single day for three weeks. Always look for accompanying sitewide $3.50 off $15 non-prestige coupons.</p>
+
+          <h3>2. Sephora Beauty Pass Sale Seasons (April & November)</h3>
+          <p>Sephora hosts two major tier-based sales each year: Rouge members save 20%, VIB saves 15%, and Insiders save 10% sitewide. In addition, Sephora Collection items are typically 30% off for the duration of the promotion without requiring a separate code.</p>
+
+          <h3>3. Always Add Sample & Deluxe GWP Codes</h3>
+          <p>Never place a Sephora order without checking their Beauty Offers page. Entering specific promo codes with a $25+ or $35+ cart yields deluxe perfume miniatures and premium moisturizers worth $15 to $30 alone.</p>
+        </div>
+      `
+    },
+    3: {
+      title: "How to Spot Real vs. Expired Promo Codes in 2026",
+      category: "Coupon Tips",
+      date: "November 2026 • 4 min read",
+      content: `
+        <div class="article-full-content">
+          <p>We've all been there: you find an alluring coupon code promising "70% Off Sitewide", paste it into checkout, only to see the dreaded red message: <em>"Code invalid or expired"</em>. Here's why that happens and how to spot genuine codes instantly.</p>
+
+          <h3>Why So Many Coupon Sites Have Broken Codes</h3>
+          <p>Most commercial coupon sites rely on automated web spiders and bot crawlers that scrape random text from forums, social media, and obsolete campaigns without human testing. Once posted, codes linger for years without verification.</p>
+
+          <h3>How PromoBella Solves This</h3>
+          <p>At PromoBella, our verification team manually tests every single promo code in real shopping carts before publication. If a code expires or has brand restrictions, we immediately remove it or specify the exact qualifying minimum.</p>
+
+          <h3>Red Flags of Fake Coupon Sites</h3>
+          <ul>
+            <li><strong>Obscene claims:</strong> "90% off all Apple MacBooks" (Apple never issues 90% off coupons).</li>
+            <li><strong>Fake countdown timers:</strong> Timers that reset to 10 minutes every time you refresh the page.</li>
+            <li><strong>Survey gates:</strong> Asking you to complete surveys or install suspicious browser toolbars to reveal the code.</li>
+          </ul>
+        </div>
+      `
+    },
+    4: {
+      title: "Fashion on a Budget: How to Score Zara, ASOS & Shein Sales Year-Round",
+      category: "Fashion & Style",
+      date: "November 2026 • 5 min read",
+      content: `
+        <div class="article-full-content">
+          <p>Staying trendy doesn't require draining your savings account. By learning the release patterns and markdown schedules of fast-fashion giants, you can consistently purchase wardrobe staples at 40% to 70% below retail.</p>
+
+          <h3>1. Zara's Bi-Annual Clearance Protocol</h3>
+          <p>Zara rarely issues generic promo codes. Instead, their deepest discounts happen during the Summer Sale (late June) and Winter Sale (late December). Markdowns begin at 20-30% off and drop to 70% off by the fourth week. The best inventory sells out in the first 48 hours via their mobile app.</p>
+
+          <h3>2. ASOS Premier Delivery & Promo Codes</h3>
+          <p>ASOS regularly releases weekend promo codes offering 20% to 25% off sitewide. If you order from ASOS more than 3 times a year, their Premier Delivery pays for itself instantly while giving you early access to sale drops.</p>
+
+          <h3>3. Maximizing Shein Points & Tiered Coupons</h3>
+          <p>Shein offers stacked tiered coupons (e.g. 15% off $49, 20% off $89). You can layer daily app check-in points on top of promo codes to cover up to 30% of the remaining order subtotal.</p>
+        </div>
+      `
+    },
+    5: {
+      title: "Smart Tech Savings: Student, Trade-In & Refurbished Deals at Apple & Amazon",
+      category: "Tech & Electronics",
+      date: "November 2026 • 6 min read",
+      content: `
+        <div class="article-full-content">
+          <p>Technology hardware has narrow profit margins, meaning coupon codes rarely knock off massive percentages. However, savvy consumers can leverage manufacturer trade-ins and certified refurbished inventory to save hundreds of dollars.</p>
+
+          <h3>1. Apple Education Store Pricing</h3>
+          <p>Students, teachers, and faculty members can purchase iPads, MacBooks, and AppleCare at 8% to 10% below retail through the official Apple Education portal year-round, plus receive seasonal gift card bundles during Back to School promotions.</p>
+
+          <h3>2. Amazon Renewed (Certified Refurbished)</h3>
+          <p>Amazon Renewed products are professionally inspected, tested, and cleaned to look and work like new. They come backed by a 90-day Amazon Renewed Guarantee and typically cost 20% to 40% less than brand-new units.</p>
+
+          <h3>3. Trade-In Valuation Boosts</h3>
+          <p>Before buying a new smartphone, laptop, or tablet, check trade-in promotion windows. When new flagship devices launch in September and October, retailers frequently offer $150+ promotional trade-in bonuses above fair market value.</p>
+        </div>
+      `
+    },
+    6: {
+      title: "The Retail Sales Calendar: Key Shopping Dates You Shouldn't Miss",
+      category: "Seasonal Sales",
+      date: "November 2026 • 7 min read",
+      content: `
+        <div class="article-full-content">
+          <p>Timing is everything in retail. Every category of consumer product has specific months when inventory turnover forces stores to offer their highest discounts. Bookmark this seasonal savings calendar.</p>
+
+          <h3>Q1: January to March</h3>
+          <ul>
+            <li><strong>January:</strong> White Sales (up to 60% off bedding, sheets, and home goods) and post-holiday winter clothing liquidation.</li>
+            <li><strong>February:</strong> Presidents' Day mattress and major appliance promotions.</li>
+            <li><strong>March:</strong> Spring beauty launches and Ulta 21 Days of Beauty.</li>
+          </ul>
+
+          <h3>Q2: April to June</h3>
+          <ul>
+            <li><strong>April:</strong> Sephora Spring Savings Event and Easter fashion clearance.</li>
+            <li><strong>May:</strong> Memorial Day outdoor furniture, grills, and summer clothing sales.</li>
+            <li><strong>June:</strong> Semi-annual clearance sales at Zara, Nordstrom, and Victoria's Secret.</li>
+          </ul>
+
+          <h3>Q3 & Q4: July to December</h3>
+          <ul>
+            <li><strong>July:</strong> Amazon Prime Day and mid-summer counter-sales across all retail.</li>
+            <li><strong>August/September:</strong> Back to school laptop and student tech specials.</li>
+            <li><strong>November/December:</strong> Black Friday, Cyber Week, and holiday countdown discounts—the year's lowest prices across electronics, fashion, and beauty.</li>
+          </ul>
+        </div>
+      `
+    }
+  };
+
+  // Article Reader Modal Logic
+  const articleReaderModal = document.getElementById('articleReaderModal');
+  const readerModalTitle = document.getElementById('readerModalTitle');
+  const readerModalBody = document.getElementById('readerModalBody');
+  const closeReaderModal = document.getElementById('closeReaderModal');
+  const closeReaderModalFooter = document.getElementById('closeReaderModalFooter');
+
+  document.querySelectorAll('.blog-read-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const blogId = btn.getAttribute('data-blog-id');
+      const article = blogArticlesData[blogId];
+      if (!article || !articleReaderModal) return;
+
+      if (readerModalTitle) readerModalTitle.textContent = article.title;
+      if (readerModalBody) {
+        readerModalBody.innerHTML = `
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #4c1fa2; text-transform: uppercase; background: #f3ebfc; padding: 0.25rem 0.65rem; border-radius: 999px;">${article.category}</span>
+            <span style="font-size: 0.85rem; color: #777; margin-left: 0.5rem;">${article.date}</span>
+          </div>
+          ${article.content}
+        `;
+      }
+      articleReaderModal.style.display = 'flex';
+    });
+  });
+
+  function closeReader() {
+    if (articleReaderModal) articleReaderModal.style.display = 'none';
+  }
+
+  if (closeReaderModal) closeReaderModal.addEventListener('click', closeReader);
+  if (closeReaderModalFooter) closeReaderModalFooter.addEventListener('click', closeReader);
+  if (articleReaderModal) {
+    articleReaderModal.addEventListener('click', (e) => {
+      if (e.target === articleReaderModal) closeReader();
+    });
+  }
+
+  // ==========================================
   // Initial Run
   // ==========================================
   renderStores();
